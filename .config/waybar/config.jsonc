@@ -82,7 +82,6 @@
         }
     },
     "tray": {
-        // "icon-size": 21,
         "spacing": 10
     },
     "clock": {
@@ -160,8 +159,11 @@
         }
     },
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "on-click": "network-manager-applet --indicator"
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "",
+        "format-disconnected": "",
+        "max-length": 50,
+        "on-click": "bash $HOME/.config/rofi-wifi-menu/rofi-wifi-menu.sh"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float

@@ -2,13 +2,13 @@
     border: none;
     border-radius: 0;
     font-family: Roboto;
-    font-size: 13px;
+    font-size: 12px;
     min-height: 0;
 }
 
 window#waybar {
     padding-left: 16px;
-    background: rgba(43, 48, 59, 0.0);
+    background: rgba(43, 48, 59, 0.1);
     color: #FFF;
 }
 
@@ -48,4 +48,50 @@ window#waybar {
     border-radius: 10px;
     min-width: 30px;
     background-size: 400% 400%;
+}
+
+#mpd,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#temperature,
+#clock,
+#bluetooth,
+#power-profiles-daemon,
+#window {
+    min-width: 30px;
+    padding-left: 8px;
+    border-radius: 5px;
+    padding-right: 8px;
+    background-color: rgba(100, 100, 100, 0.2);
+    font-weight: 700;
+}
+
+#clock {
+    font-size: 14px;
+}
+
+#power-profiles-daemon.balanced {
+    background-color: rgba(0, 0, 255, 0.3);
+}
+
+#power-profiles-daemon.performance {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+#power-profiles-daemon.power-saver {
+    background-color: rgba(0, 255, 0, 0.3);
+}
+
+#mpd.playing {
+
+    background: repeating-linear-gradient(45deg,
+            #453e48,
+            #453e48 12px,
+            #3d3540 12px,
+            #3d3540 24px);
+    background-size: 120% 100%;
+    animation: scroll 0.5s linear infinite;
+
 }
