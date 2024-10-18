@@ -59,8 +59,9 @@ window#waybar {
 #clock,
 #bluetooth,
 #power-profiles-daemon,
-#window {
-    min-width: 30px;
+#window,
+#custom-power {
+    min-width: 20px;
     padding-left: 8px;
     border-radius: 5px;
     padding-right: 8px;
