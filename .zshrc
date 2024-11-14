@@ -112,3 +112,15 @@ export NVM_DIR="$HOME/.nvm"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# bun completions
+[ -s "/home/felipe/.bun/_bun" ] && source "/home/felipe/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Created by `pipx` on 2024-10-29 20:18:16
+export PATH="$PATH:/home/felipe/.local/bin"
+export PATH="$PATH:/home/felipe/.cargo/bin"
+export PATH="$PATH:$HOME/.config/dart-sass/"
