@@ -1,0 +1,98 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: Roboto;
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    padding-left: 16px;
+    background: rgba(43, 48, 59, 0.1);
+    color: #FFF;
+}
+
+#workspaces {
+    background: #FFF;
+    margin: 5px 5px 5px 5px;
+    border-radius: 12px;
+    font-weight: normal;
+    padding: 4px 1px;
+    opacity: 0.8;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    margin: 0 3px;
+    border-radius: 12px;
+    color: #0000FF;
+    background-color: #0000EE;
+    transition: all 0.3s ease-in-out;
+    opacity: 0.4;
+    font-size: 13px;
+}
+
+#workspaces button.active {
+    color: #cdd6f4;
+    opacity: 1.0;
+    background-color: #0000FF;
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+    min-width: 30px;
+    background-size: 400% 400%;
+}
+
+#workspaces button:hover {
+    background-color: #0000FF;
+    color: #cdd6f4;
+    border-radius: 10px;
+    min-width: 30px;
+    background-size: 400% 400%;
+}
+
+#mpd,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#temperature,
+#clock,
+#bluetooth,
+#power-profiles-daemon,
+#window,
+#custom-power {
+    min-width: 20px;
+    padding-left: 8px;
+    border-radius: 5px;
+    padding-right: 8px;
+    background-color: rgba(100, 100, 100, 0.2);
+    font-weight: 700;
+}
+
+#clock {
+    font-size: 14px;
+}
+
+#power-profiles-daemon.balanced {
+    background-color: rgba(0, 0, 255, 0.3);
+}
+
+#power-profiles-daemon.performance {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+#power-profiles-daemon.power-saver {
+    background-color: rgba(0, 255, 0, 0.3);
+}
+
+#mpd.playing {
+
+    background: repeating-linear-gradient(45deg,
+            #453e48,
+            #453e48 12px,
+            #3d3540 12px,
+            #3d3540 24px);
+    background-size: 120% 100%;
+    animation: scroll 0.5s linear infinite;
+
+}
