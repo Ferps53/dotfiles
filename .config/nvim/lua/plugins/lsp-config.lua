@@ -47,6 +47,20 @@ return {
 				capabilities = capabilites,
 			})
 
+			lspconfig.arduino_language_server.setup({
+				cmd = {
+					"arduino-language-server",
+					"-cli-config",
+					"~/.arduino15/arduino-cli.yaml",
+					"-cli",
+					"arduino-cli",
+					"-clangd",
+					"clangd",
+					"-fqbn",
+					"arduino:avr:uno",
+				},
+			})
+
 			require("mason-lspconfig").setup_handlers({
 				function(server_name)
 					if server_name ~= "jdtls" then

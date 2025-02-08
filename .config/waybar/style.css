@@ -1,56 +1,49 @@
+@import 'macchiato.css';
+
 * {
-    border: none;
-    border-radius: 0;
-    font-family: Roboto;
-    font-size: 12px;
-    min-height: 0;
+  border-radius: 0;
+  font-family: 'JetBrainsMono Nerd Font', Roboto;
+  font-size: 12px;
+  min-height: 0;
+}
+
+tooltip {
+  border-radius: 8px;
+  background-color: @crust;
+}
+
+tooltip label {
+  font-size: 10px;
+  color: @text;
 }
 
 window#waybar {
-    padding-left: 16px;
-    background: rgba(43, 48, 59, 0.1);
-    color: #FFF;
+  padding-left: 16px;
+  background: @crust;
+  min-height: 40px;
+  border-bottom: 2px solid shade(@crust, 1.2);
+  color: @text;
 }
 
-#workspaces {
-    background: #FFF;
-    margin: 5px 5px 5px 5px;
-    border-radius: 12px;
-    font-weight: normal;
-    padding: 4px 1px;
-    opacity: 0.8;
+#window {
+  font-size: 11px;
 }
 
 #workspaces button {
-    padding: 0 10px;
-    margin: 0 3px;
-    border-radius: 12px;
-    color: #0000FF;
-    background-color: #0000EE;
-    transition: all 0.3s ease-in-out;
-    opacity: 0.4;
-    font-size: 13px;
+  border-radius: 8px;
+  color: @text;
+  margin: 0 2px 0 2px;
 }
 
 #workspaces button.active {
-    color: #cdd6f4;
-    opacity: 1.0;
-    background-color: #0000FF;
-    transition: all 0.3s ease-in-out;
-    border-radius: 10px;
-    min-width: 30px;
-    background-size: 400% 400%;
+  background-color: shade(@teal, 0.6);
 }
 
 #workspaces button:hover {
-    background-color: #0000FF;
-    color: #cdd6f4;
-    border-radius: 10px;
-    min-width: 30px;
-    background-size: 400% 400%;
+  opacity: 0.5;
 }
 
-#mpd,
+#workspaces,
 #pulseaudio,
 #network,
 #cpu,
@@ -60,39 +53,38 @@ window#waybar {
 #bluetooth,
 #power-profiles-daemon,
 #window,
-#custom-power {
-    min-width: 20px;
-    padding-left: 8px;
-    border-radius: 5px;
-    padding-right: 8px;
-    background-color: rgba(100, 100, 100, 0.2);
-    font-weight: 700;
+#custom-power,
+#backlight,
+#battery {
+  min-width: 20px;
+  padding-left: 8px;
+  border-radius: 5px;
+  padding-right: 8px;
+  background-color: @mantle;
+  border: 1px solid shade(@mantle, 1.2);
+  font-weight: 700;
 }
 
 #clock {
-    font-size: 14px;
+  font-size: 14px;
+}
+
+#battery.full {
+  background-color: shade(@green, 0.5);
+}
+
+#battery.charging {
+  background-color: shade(@flamingo, 0.5);
 }
 
 #power-profiles-daemon.balanced {
-    background-color: rgba(0, 0, 255, 0.3);
+  background-color: shade(@blue, 0.5);
 }
 
 #power-profiles-daemon.performance {
-    background-color: rgba(255, 0, 0, 0.3);
+  background-color: shade(@maroon, 0.5);
 }
 
 #power-profiles-daemon.power-saver {
-    background-color: rgba(0, 255, 0, 0.3);
-}
-
-#mpd.playing {
-
-    background: repeating-linear-gradient(45deg,
-            #453e48,
-            #453e48 12px,
-            #3d3540 12px,
-            #3d3540 24px);
-    background-size: 120% 100%;
-    animation: scroll 0.5s linear infinite;
-
+  background-color: shade(@green, 0.5);
 }
