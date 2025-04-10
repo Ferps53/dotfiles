@@ -126,3 +126,7 @@ export PATH="$PATH:/home/felipe/.local/bin"
 export PATH="$PATH:/home/felipe/.cargo/bin"
 export PATH="$PATH:$HOME/.config/dart-sass/"
 export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:$HOME/go/bin"
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
