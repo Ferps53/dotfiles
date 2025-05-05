@@ -130,3 +130,9 @@ export PATH="$PATH:$HOME/go/bin"
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/felipe/.dart-cli-completion/zsh-config.zsh ]] && . /home/felipe/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
