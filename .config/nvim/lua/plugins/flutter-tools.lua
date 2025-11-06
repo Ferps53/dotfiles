@@ -4,9 +4,12 @@ return {
     "nvim-lua/plenary.nvim",
     "stevearc/dressing.nvim",
   },
-  config = function ()
-    require("flutter-tools").setup {}
-
+  config = function()
+    require("flutter-tools").setup({
+      widget_guides = {
+        enabled = true
+      }
+    })
 
     vim.keymap.set("n", "<leader>fR", "<CMD>FlutterRun<CR>")
     vim.keymap.set("n", "<leader>fd", "<CMD>FlutterDevices<CR>")
@@ -14,5 +17,6 @@ return {
     vim.keymap.set("n", "<leader>fr", "<CMD>FlutterReload<CR>")
     vim.keymap.set("n", "<leader>fx", "<CMD>FlutterRestart<CR>")
     vim.keymap.set("n", "<leader>fcl", "<CMD>FlutterLspRestart<CR>")
+    vim.keymap.set("n", "<leader>fq", "<CMD>FlutterQuit<CR>")
   end,
 }
