@@ -5,6 +5,7 @@ vim.cmd("set shiftwidth=2")
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
+vim.opt.wrap=false
 
 vim.g.mapleader = " "
 vim.opt.inccommand = "split"
