@@ -63,6 +63,9 @@ vim.opt.encoding = "UTF-8"              -- Set encoding
 
 vim.g.mapleader = " "
 
+vim.diagnostic.config({
+  virtual_lines = true,
+})
 vim.opt.guicursor =
 "n-v-c:block,i-ci-ve:block,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
 
@@ -88,7 +91,7 @@ require("catppuccin").setup({
 })
 
 vim.cmd.colorscheme "catppuccin"
-vim.lsp.enable({ "lua_ls", "svelte-language-server", "zls" })
+vim.lsp.enable({ "lua_ls", "svelte-language-server", "zls", "lemminx" })
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
@@ -122,7 +125,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- COMPLETION SETTINGS & KEYMAPS
 -- Don't select the first item automatically, but show the menu
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.completeopt = { "menu", "menuone", "noselect", "fuzzy", "popup" }
 
 -- Use <Tab> to navigate suggestions and <Enter> to confirm
 vim.keymap.set('i', '<Tab>', function()
@@ -190,8 +193,8 @@ if status then
   })
 
   -- 4. Enable Folding (Optional, but recommended)
-  vim.opt.foldmethod = "expr"
-  vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  -- vim.opt.foldmethod = "expr"
+  -- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 else
   print("nvim-treesitter failed to load")
 end
