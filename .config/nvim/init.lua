@@ -77,6 +77,7 @@ vim.pack.add({
   { src = "https://github.com/catppuccin/nvim" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/stevearc/oil.nvim" },
+  { src = "https://github.com/nvim-tree/nvim-web-devicons" },
   { src = "https://github.com/nvim-telescope/telescope.nvim" },
   { src = "https://github.com/nvim-lua/plenary.nvim" },
   { src = "https://github.com/echasnovski/mini.pick" },
@@ -84,7 +85,35 @@ vim.pack.add({
   { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
   { src = "https://github.com/mason-org/mason-registry" },
   { src = "https://codeberg.org/mfussenegger/nvim-jdtls" },
+  { src = "https://github.com/mfussenegger/nvim-dap" },
+  { src = "https://github.com/rcarriga/nvim-dap-ui" },
+  { src = "https://github.com/theHamsta/nvim-dap-virtual-text" },
+  { src = "https://github.com/julianolf/nvim-dap-lldb" },
+  { src = "https://github.com/nvim-neotest/nvim-nio" },
+  { src = "https://github.com/nvim-lualine/lualine.nvim" },
 })
+
+require('lualine').setup({
+  options = {
+    theme = 'catppuccin'
+  },
+})
+
+require("dap-lldb").setup()
+local dap, dapui = require("dap"), require("dapui")
+
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+  dapui.close()
+end
+
+vim.keymap.set({ 'n' }, '<Leader>d', ':DapNew<CR>')
+vim.keymap.set({ 'n', 'i' }, '<C-b>', ':DapToggleBreakpoint<CR>')
 
 require("catppuccin").setup({
   transparent_background = true
@@ -104,9 +133,22 @@ vim.lsp.config("lua_ls", {
 
 require("mini.pick").setup()
 require("oil").setup({
+  lsp_file_methods = {
+    enabled = true,
+    timeout_ms = 1000,
+    autosave_changes = true,
+  },
+  columns = {
+    "icon",
+  },
+  float = {
+    max_width = 0.3,
+    max_height = 0.6,
+    border = "rounded",
+  },
   view_options = {
     show_hidden = true
-  }
+  },
 })
 require("mason").setup()
 
@@ -181,7 +223,7 @@ if status then
 
   -- 2. Install Parsers (Replaces ensure_installed)
   -- Note: This runs asynchronously.
-  ts.install({ "java", "javascript", "typescript", "html", "css", "lua" })
+  ts.install({ "java", "javascript", "typescript", "html", "css", "lua", "zig" })
 
   -- 3. Enable Highlighting
   -- In the new version, you don't enable highlighting in the setup() table.
