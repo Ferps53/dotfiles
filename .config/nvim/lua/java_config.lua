@@ -21,7 +21,7 @@ function M:setup()
 
   local config = {
     cmd = {
-      vim.fn.expand '~/.sdkman/candidates/java/25-amzn/bin/java', -- or '/path/to/java17_or_newer/bin/java'
+      vim.fn.expand '~/.sdkman/candidates/java/21.*-amzn/bin/java', -- or '/path/to/java17_or_newer/bin/java'
 
       '-Declipse.application=org.eclipse.jdt.ls.core.id1',
       '-Dosgi.bundles.defaultStartLevel=4',
