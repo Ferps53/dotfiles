@@ -20,21 +20,21 @@ vim.opt.hlsearch = false  -- Don't highlight search results
 vim.opt.incsearch = true  -- Show matches as you type
 
 -- Visual settings
-vim.opt.termguicolors = true                      -- Enable 24-bit colors
-vim.opt.signcolumn = "yes"                        -- Always show sign column
-vim.opt.colorcolumn = "100"                       -- Show column at 100 characters
-vim.opt.showmatch = true                          -- Highlight matching brackets
-vim.opt.matchtime = 2                             -- How long to show matching bracket
-vim.opt.cmdheight = 1                             -- Command line height
-vim.opt.completeopt = "menuone,noinsert,noselect" -- Completion options
-vim.opt.showmode = false                          -- Don't show mode in command line
-vim.opt.pumheight = 10                            -- Popup menu height
-vim.opt.pumblend = 10                             -- Popup menu transparency
-vim.opt.winblend = 0                              -- Floating window transparency
-vim.opt.conceallevel = 0                          -- Don't hide markup
-vim.opt.concealcursor = ""                        -- Don't hide cursor line markup
-vim.opt.lazyredraw = true                         -- Don't redraw during macros
-vim.opt.synmaxcol = 300                           -- Syntax highlighting limit
+vim.opt.termguicolors = true                            -- Enable 24-bit colors
+vim.opt.signcolumn = "yes"                              -- Always show sign column
+vim.opt.colorcolumn = "100"                             -- Show column at 100 characters
+vim.opt.showmatch = true                                -- Highlight matching brackets
+vim.opt.matchtime = 2                                   -- How long to show matching bracket
+vim.opt.cmdheight = 1                                   -- Command line height
+vim.opt.completeopt = "menuone,noinsert,noselect,fuzzy" -- Completion options
+vim.opt.showmode = false                                -- Don't show mode in command line
+vim.opt.pumheight = 10                                  -- Popup menu height
+vim.opt.pumblend = 10                                   -- Popup menu transparency
+vim.opt.winblend = 0                                    -- Floating window transparency
+vim.opt.conceallevel = 0                                -- Don't hide markup
+vim.opt.concealcursor = ""                              -- Don't hide cursor line markup
+vim.opt.lazyredraw = true                               -- Don't redraw during macros
+vim.opt.synmaxcol = 300                                 -- Syntax highlighting limit
 
 -- File handling
 vim.opt.backup = false                            -- Don't create backup files
@@ -79,18 +79,14 @@ vim.pack.add({
   { src = "https://github.com/stevearc/oil.nvim" },
   { src = "https://github.com/nvim-telescope/telescope.nvim" },
   { src = "https://github.com/nvim-lua/plenary.nvim" },
+  { src = "https://github.com/nvim-tree/nvim-web-devicons" },
   { src = "https://github.com/echasnovski/mini.pick" },
   { src = "https://github.com/mason-org/mason.nvim" },
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
   { src = "https://github.com/mason-org/mason-registry" },
   { src = "https://codeberg.org/mfussenegger/nvim-jdtls" },
 })
 
-require("catppuccin").setup({
-  transparent_background = true
-})
-
-vim.cmd.colorscheme "catppuccin"
 vim.lsp.enable({ "lua_ls", "svelte-language-server", "zls", "lemminx" })
 vim.lsp.config("lua_ls", {
   settings = {
@@ -102,11 +98,26 @@ vim.lsp.config("lua_ls", {
   }
 })
 
-require("mini.pick").setup()
+local minipick = require("mini.pick")
+minipick.setup()
+minipick.registry.file = function()
+  local command = { 'rg', '--files', '--hidden', '--glob', '!.git/*' }
+  return MiniPick.builtin.cli({ command = command }, { source = { name = 'Files' } })
+end
+
+
 require("oil").setup({
+  lsp_file_method = {
+    enabled = true,
+    timeout_ms = 1000,
+    autosave_changes = true,
+  },
+  columns = {
+    "icon",
+  },
   view_options = {
     show_hidden = true
-  }
+  },
 })
 require("mason").setup()
 
@@ -165,7 +176,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gs', builtin.lsp_workspace_symbols, opts)
     vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
     vim.keymap.set({ 'n', 'x' }, '=', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-    vim.keymap.set('n', '<F4>', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "g]", '<cmd>lua vim.diagnostic.jump({count=1, float=true})<cr>', opts)
     vim.keymap.set("n", "g[", '<cmd>lua vim.diagnostic.jump({count=-1, float=true})<cr>', opts)
   end,
@@ -181,15 +192,15 @@ if status then
 
   -- 2. Install Parsers (Replaces ensure_installed)
   -- Note: This runs asynchronously.
-  ts.install({ "java", "javascript", "typescript", "html", "css", "lua" })
+  ts.install({ "java", "javascript", "typescript", "html", "css", "lua", "htmlangular" })
 
   -- 3. Enable Highlighting
   -- In the new version, you don't enable highlighting in the setup() table.
   -- You use a standard Neovim autocommand to start treesitter for filetypes.
   vim.api.nvim_create_autocmd("FileType", {
     callback = function()
-      pcall(vim.treesitter.start)
-    end,
+       pcall(vim.treesitter.start)
+    end
   })
 
   -- 4. Enable Folding (Optional, but recommended)
@@ -201,7 +212,14 @@ end
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'java',
-  callback = function(args)
-    require('java_config').setup()
+  callback = function()
+    require('java_config')
+        .setup()
   end
 })
+
+require("catppuccin").setup({
+  transparent_background = true,
+})
+
+vim.cmd.colorscheme "catppuccin"
