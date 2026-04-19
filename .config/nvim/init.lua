@@ -92,6 +92,12 @@ vim.pack.add({
   { src = "https://github.com/julianolf/nvim-dap-lldb" },
   { src = "https://github.com/nvim-neotest/nvim-nio" },
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
+  {
+    src = "https://github.com/saghen/blink.cmp",
+    version = "1.9.1",
+  },
+  { src = 'https://github.com/vyfor/cord.nvim', },
+  { src = 'https://github.com/nvim-flutter/flutter-tools.nvim' }
 })
 
 require('lualine').setup({
@@ -99,6 +105,8 @@ require('lualine').setup({
     theme = 'catppuccin'
   },
 })
+
+require('flutter-tools').setup({})
 
 require("dap-lldb").setup()
 local dap, dapui = require("dap"), require("dapui")
@@ -120,8 +128,8 @@ require("catppuccin").setup({
   transparent_background = true
 })
 
-vim.cmd.colorscheme "catppuccin"
-vim.lsp.enable({ "lua_ls", "svelte-language-server", "zls", "lemminx" })
+  vim.cmd.colorscheme "catppuccin"
+vim.lsp.enable({ "lua_ls", "svelte-language-server", "zls", "lemminx", "dcm", "biome", "ts_ls", "prisma-ls" })
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
@@ -131,6 +139,15 @@ vim.lsp.config("lua_ls", {
     }
   }
 })
+
+vim.lsp.config('dcm', {})
+
+require('cord').setup({
+  display = {
+    theme = 'catppuccin',
+    flavor = 'accent'
+  }
+});
 
 local minipick = require("mini.pick")
 minipick.setup()
@@ -159,37 +176,23 @@ require("oil").setup({
   },
 })
 require("mason").setup()
+require("blink.cmp").setup({
+  signature = { enabled = true },
+  completion = {
+    documentation = { auto_show = true, auto_show_delay_ms = 500 },
+    menu = {
+      auto_show = true,
+      draw = {
+        treesitter = { "lsp" },
+        columns = { { "kind_icon", "label", "label_description", gap = 1, }, { "kind" } },
+      }
+    }
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(ev)
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if client == nil then
-      return
-    end
-
-    if client:supports_method('textDocument/completion') then
-      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-    end
-  end
+  }
 })
 
 -- COMPLETION SETTINGS & KEYMAPS
 -- Don't select the first item automatically, but show the menu
-vim.opt.completeopt = { "menu", "menuone", "noselect", "fuzzy", "popup" }
-
--- Use <Tab> to navigate suggestions and <Enter> to confirm
-vim.keymap.set('i', '<Tab>', function()
-  return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
-end, { expr = true })
-
-vim.keymap.set('i', '<S-Tab>', function()
-  return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
-end, { expr = true })
-
-vim.keymap.set('i', '<CR>', function()
-  return vim.fn.pumvisible() == 1 and "<C-y>" or "<CR>"
-end, { expr = true })
-
 vim.keymap.set('n', '<leader>f', ':Pick files<CR>')
 vim.keymap.set('n', '<leader>h', ':Pick help<CR>')
 vim.keymap.set('n', '-', ':Oil<CR>')
@@ -203,7 +206,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     -- Disable semantic highlights
-    client.server_capabilities.semanticTokensProvider = nil
+    -- client.server_capabilities.semanticTokensProvider = nil
 
     local opts = { buffer = event.buf }
     local builtin = require('telescope.builtin')
@@ -231,14 +234,14 @@ if status then
 
   -- 2. Install Parsers (Replaces ensure_installed)
   -- Note: This runs asynchronously.
-  ts.install({ "java", "javascript", "typescript", "html", "css", "lua", "htmlangular", "zig" })
+  ts.install({ "java", "javascript", "typescript", "html", "css", "lua", "htmlangular", "zig", "dart", "kotlin", "prisma" })
 
   -- 3. Enable Highlighting
   -- In the new version, you don't enable highlighting in the setup() table.
   -- You use a standard Neovim autocommand to start treesitter for filetypes.
   vim.api.nvim_create_autocmd("FileType", {
     callback = function()
-       pcall(vim.treesitter.start)
+      pcall(vim.treesitter.start)
     end
   })
 
