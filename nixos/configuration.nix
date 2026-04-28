@@ -99,6 +99,14 @@ nixpkgs.overlays = [
       spotify
       wlogout
       discord
+      hyprpaper
+      hyprlock
+      libreoffice
+      wine
+      nodejs
+      bun
+      openssl
+      prisma-engines
 		];
 
 		sessionVariables = {
