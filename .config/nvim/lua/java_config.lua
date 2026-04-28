@@ -7,10 +7,10 @@ function M:setup()
 
   local equinox_launcher_path = vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar')
 
-  local system = 'linux'
-  if vim.fn.has 'win32' then
+local system = 'linux'
+  if vim.fn.has('win32') == 1 then
     system = 'win'
-  elseif vim.fn.has 'mac' then
+  elseif vim.fn.has('mac') == 1 then
     system = 'mac'
   end
   local config_path = vim.fn.glob(jdtls_path .. '/config_' .. system)

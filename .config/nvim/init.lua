@@ -16,7 +16,7 @@ vim.opt.autoindent = true  -- Copy indent from current line
 -- Search settings
 vim.opt.ignorecase = true -- Case insensitive search
 vim.opt.smartcase = true  -- Case sensitive if uppercase in search
-vim.opt.hlsearch = false  -- Don't highlight search results
+vim.opt.hlsearch = true   -- Don't highlight search results
 vim.opt.incsearch = true  -- Show matches as you type
 
 -- Visual settings
@@ -94,10 +94,11 @@ vim.pack.add({
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
   {
     src = "https://github.com/saghen/blink.cmp",
-    version = "1.9.1",
+    version = "v1.*",
   },
   { src = 'https://github.com/vyfor/cord.nvim', },
-  { src = 'https://github.com/nvim-flutter/flutter-tools.nvim' }
+  { src = 'https://github.com/nvim-flutter/flutter-tools.nvim' },
+  { src = 'https://github.com/iamcco/markdown-preview.nvim' }
 })
 
 require('lualine').setup({
@@ -128,7 +129,7 @@ require("catppuccin").setup({
   transparent_background = true
 })
 
-  vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "catppuccin"
 vim.lsp.enable({ "lua_ls", "svelte-language-server", "zls", "lemminx", "dcm", "biome", "ts_ls", "prisma-ls" })
 vim.lsp.config("lua_ls", {
   settings = {
@@ -140,7 +141,6 @@ vim.lsp.config("lua_ls", {
   }
 })
 
-vim.lsp.config('dcm', {})
 
 require('cord').setup({
   display = {
@@ -234,7 +234,7 @@ if status then
 
   -- 2. Install Parsers (Replaces ensure_installed)
   -- Note: This runs asynchronously.
-  ts.install({ "java", "javascript", "typescript", "html", "css", "lua", "htmlangular", "zig", "dart", "kotlin", "prisma" })
+  ts.install({ "java", "javascript", "typescript", "html", "css", "lua", "zig", "dart", "kotlin", "prisma" })
 
   -- 3. Enable Highlighting
   -- In the new version, you don't enable highlighting in the setup() table.
@@ -265,3 +265,34 @@ require("catppuccin").setup({
 })
 
 vim.cmd.colorscheme "catppuccin"
+
+-- ==========================================
+-- Auto-install Markdown Preview dependencies
+-- ==========================================
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    -- 1. Encontra o script de instalação para descobrir a raiz do plugin
+    local install_script = vim.api.nvim_get_runtime_file("app/install.sh", false)[1]
+
+    if install_script then
+      -- 2. Pega o caminho da pasta 'app' dentro do plugin
+      local app_dir = vim.fn.fnamemodify(install_script, ":h")
+
+      -- 3. Verifica se a pasta 'bin' (onde ficam os executáveis baixados) já existe
+      local is_installed = vim.fn.isdirectory(app_dir .. "/bin") == 1
+
+      -- 4. Se não estiver instalado, avisa o usuário e roda a função nativa
+      if not is_installed then
+        vim.notify("Instalando servidor do Markdown Preview. Isso pode levar alguns segundos...", vim.log.levels.INFO)
+        -- Usamos pcall para garantir que um erro na instalação não trave a abertura do arquivo
+        pcall(function()
+          vim.fn["mkdp#util#install"]()
+        end)
+      end
+    end
+  end
+})
+vim.g.mkdp_auto_close = 0
+vim.g.mkdp_theme = 'dark'
+vim.keymap.set('n', '<leader>mp', ':MarkdownPreviewToggle<CR>', { desc = 'Abrir/Fechar previsão de markdown' })
