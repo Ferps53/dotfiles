@@ -107,6 +107,7 @@ nixpkgs.overlays = [
       bun
       openssl
       prisma-engines
+      ffmpeg
 		];
 
 		sessionVariables = {
@@ -115,6 +116,10 @@ nixpkgs.overlays = [
 			__GLX_VENDOR_LIBRARY = "nvidia";
 			WLR_NO_HARDWARE_CURSORS = "1";
 			NIXOS_OZONE_WL = "1";
+      PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
+      PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
+      PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
+      PRISMA_FMT_BINARY = "${pkgs.prisma-engines}/bin/prisma-fmt";
 		};
 	};
 
