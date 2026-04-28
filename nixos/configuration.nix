@@ -68,6 +68,9 @@
 		shell = pkgs.fish;
 	};
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+  ];
 
 nixpkgs.overlays = [
     inputs.neovim-nightly-overlay.overlays.default
@@ -92,6 +95,7 @@ nixpkgs.overlays = [
 			cliphist
       rofi
       steam
+      psmisc
       spotify
       wlogout
       discord
