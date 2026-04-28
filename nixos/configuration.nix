@@ -92,6 +92,9 @@ nixpkgs.overlays = [
 			cliphist
       rofi
       steam
+      spotify
+      wlogout
+      discord
 		];
 
 		sessionVariables = {
