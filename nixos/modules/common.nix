@@ -81,9 +81,9 @@
       alejandra
       nil
       lua-language-server
-      nodePackages.typescript-language-server
-      nodePackages.svelte-language-server
-      nodePackages."@prisma/language-server"
+      typescript-language-server
+      svelte-language-server
+      prisma/language-server
       zls
       biome
       lemminx
