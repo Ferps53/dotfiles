@@ -4,6 +4,13 @@
   networking.networkmanager.enable = true;
 
 
+	hardware = {
+  		bluetooth = {
+    			enable = true;
+    			powerOnBoot = true;
+  		};
+	};
+
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
@@ -118,7 +125,6 @@
       PRISMA_FMT_BINARY = "${pkgs.prisma-engines}/bin/prisma-fmt";
     };
   };
-
 
 
   security.rtkit.enable = true;
