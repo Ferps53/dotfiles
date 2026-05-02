@@ -7,12 +7,15 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = { self, nixpkgs, ... } @ inputs: {
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: {
     nixosConfigurations = {
-      
       "ferps-home" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; }; 
+        specialArgs = {inherit inputs;};
         modules = [
           ./hosts/ferps-home/hardware-configuration.nix
           ./hosts/ferps-home/configuration.nix
@@ -21,13 +24,12 @@
 
       "ferps-work" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = {inherit inputs;};
         modules = [
           ./hosts/ferps-work/hardware-configuration.nix
           ./hosts/ferps-work/configuration.nix
         ];
       };
-
     };
   };
 }

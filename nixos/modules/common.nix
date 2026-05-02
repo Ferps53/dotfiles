@@ -1,27 +1,30 @@
-{ config, lib, pkgs, inputs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: {
   networking.networkmanager.enable = true;
 
-
-	hardware = {
-  		bluetooth = {
-    			enable = true;
-    			powerOnBoot = true;
-  		};
-	};
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+  };
 
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
       auto-optimise-store = true;
     };
-  gc = {
+    gc = {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-};
+  };
 
   time.timeZone = "America/Sao_Paulo";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -55,14 +58,14 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 
   users.users.ferps = {
     isNormalUser = true;
     uid = 1000;
     description = "Ferps";
-    extraGroups = [ "networkmanager" "wheel" "video" "docker" ];
+    extraGroups = ["networkmanager" "wheel" "video" "docker"];
     shell = pkgs.fish;
   };
 
@@ -82,19 +85,44 @@
 
   programs.java = {
     enable = true;
-    package = pkgs.jdk21; 
+    package = pkgs.jdk21;
   };
 
   environment = {
     systemPackages = with pkgs; [
       # Ferramentas Base
-      git stow firefox kitty blueman networkmanagerapplet pavucontrol
-      neovim dunst tmux waybar nautilus wl-clipboard cliphist rofi
-      wlogout hyprpaper hyprlock libreoffice ffmpeg docker psmisc spotify discord
-      
+      git
+      stow
+      firefox
+      kitty
+      blueman
+      networkmanagerapplet
+      pavucontrol
+      neovim
+      dunst
+      tmux
+      waybar
+      nautilus
+      wl-clipboard
+      cliphist
+      rofi
+      wlogout
+      hyprpaper
+      hyprlock
+      libreoffice
+      ffmpeg
+      docker
+      psmisc
+      spotify
+      discord
+
       # Ferramentas de Dev
-      zig nodejs bun openssl prisma-engines
-      
+      zig
+      nodejs
+      bun
+      openssl
+      prisma-engines
+
       # LSPs, Formatadores e Dependências do Neovim
       alejandra
       nil
@@ -113,8 +141,8 @@
 
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
-      
-      JAVA_8_HOME  = "${pkgs.jdk8}/lib/openjdk";
+
+      JAVA_8_HOME = "${pkgs.jdk8}/lib/openjdk";
       JAVA_11_HOME = "${pkgs.jdk11}/lib/openjdk";
       JAVA_17_HOME = "${pkgs.jdk17}/lib/openjdk";
       JAVA_25_HOME = "${pkgs.jdk25}/lib/openjdk";
@@ -125,7 +153,6 @@
       PRISMA_FMT_BINARY = "${pkgs.prisma-engines}/bin/prisma-fmt";
     };
   };
-
 
   security.rtkit.enable = true;
   nixpkgs.config.allowUnfree = true;
