@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs,  inputs,... }:
 
 
@@ -9,6 +5,8 @@
 
 	networking.hostName = "ferps"; # Define your hostname.
 	networking.networkmanager.enable = true;
+
+nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 	hardware = {
   		graphics.enable = true;
@@ -49,7 +47,7 @@
 		};
  	};
 
-        programs = {
+  programs = {
 		nix-ld.enable = true;
 		hyprland.enable = true;
 		fish.enable = true;
@@ -64,7 +62,7 @@
 		isNormalUser = true;
 		uid = 1000;
 		description = "Ferps";
-		extraGroups = ["networkmanager" "wheel" "video"];
+		extraGroups = ["networkmanager" "wheel" "video" "docker" ];
 		shell = pkgs.fish;
 	};
 
@@ -75,6 +73,14 @@
 nixpkgs.overlays = [
     inputs.neovim-nightly-overlay.overlays.default
   ];
+
+
+
+virtualisation.docker.enable = true;
+virtualisation.docker.rootless = {
+  enable = true;
+  setSocketVariable = true;
+};
 
 	environment = {
 		systemPackages = with pkgs; [
@@ -108,6 +114,20 @@ nixpkgs.overlays = [
       openssl
       prisma-engines
       ffmpeg
+      docker
+      alejandra
+      nil
+      lua-language-server
+      nodePackages.typescript-language-server
+      nodePackages.svelte-language-server
+      nodePackages."@prisma/language-server"
+      zls
+      biome
+      lemminx
+      jdt-language-server
+      ripgrep
+      fd
+      lldb
 		];
 
 		sessionVariables = {

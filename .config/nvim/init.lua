@@ -205,9 +205,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
 
-    -- Disable semantic highlights
-    -- client.server_capabilities.semanticTokensProvider = nil
-
     local opts = { buffer = event.buf }
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', 'gh', vim.lsp.buf.hover, opts)
@@ -225,29 +222,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 })
 
--- Try to load the main plugin module, not .configs
 local status, ts = pcall(require, "nvim-treesitter")
 
 if status then
-  -- 1. Setup (optional, usually empty)
   ts.setup({})
 
-  -- 2. Install Parsers (Replaces ensure_installed)
-  -- Note: This runs asynchronously.
-  ts.install({ "java", "javascript", "typescript", "html", "css", "lua", "zig", "dart", "kotlin", "prisma" })
+  ts.install({ "java", "javascript", "typescript", "html", "css", "lua", "zig", "dart", "kotlin", "prisma", "nix" })
 
-  -- 3. Enable Highlighting
-  -- In the new version, you don't enable highlighting in the setup() table.
-  -- You use a standard Neovim autocommand to start treesitter for filetypes.
   vim.api.nvim_create_autocmd("FileType", {
     callback = function()
       pcall(vim.treesitter.start)
     end
   })
 
-  -- 4. Enable Folding (Optional, but recommended)
-  -- vim.opt.foldmethod = "expr"
-  -- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 else
   print("nvim-treesitter failed to load")
 end
@@ -266,26 +253,18 @@ require("catppuccin").setup({
 
 vim.cmd.colorscheme "catppuccin"
 
--- ==========================================
--- Auto-install Markdown Preview dependencies
--- ==========================================
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
-    -- 1. Encontra o script de instalação para descobrir a raiz do plugin
     local install_script = vim.api.nvim_get_runtime_file("app/install.sh", false)[1]
 
     if install_script then
-      -- 2. Pega o caminho da pasta 'app' dentro do plugin
       local app_dir = vim.fn.fnamemodify(install_script, ":h")
 
-      -- 3. Verifica se a pasta 'bin' (onde ficam os executáveis baixados) já existe
       local is_installed = vim.fn.isdirectory(app_dir .. "/bin") == 1
 
-      -- 4. Se não estiver instalado, avisa o usuário e roda a função nativa
       if not is_installed then
         vim.notify("Instalando servidor do Markdown Preview. Isso pode levar alguns segundos...", vim.log.levels.INFO)
-        -- Usamos pcall para garantir que um erro na instalação não trave a abertura do arquivo
         pcall(function()
           vim.fn["mkdp#util#install"]()
         end)
