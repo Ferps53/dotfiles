@@ -3,7 +3,18 @@
 {
   networking.networkmanager.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      auto-optimise-store = true;
+    };
+  gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+};
 
   time.timeZone = "America/Sao_Paulo";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -83,7 +94,7 @@
       lua-language-server
       typescript-language-server
       svelte-language-server
-      prisma/language-server
+      prisma-language-server
       zls
       biome
       lemminx
@@ -96,19 +107,19 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
       
-      # Variáveis do Java
       JAVA_8_HOME  = "${pkgs.jdk8}/lib/openjdk";
       JAVA_11_HOME = "${pkgs.jdk11}/lib/openjdk";
       JAVA_17_HOME = "${pkgs.jdk17}/lib/openjdk";
       JAVA_25_HOME = "${pkgs.jdk25}/lib/openjdk";
 
-      # Variáveis do Prisma
       PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
       PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
       PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
       PRISMA_FMT_BINARY = "${pkgs.prisma-engines}/bin/prisma-fmt";
     };
   };
+
+
 
   security.rtkit.enable = true;
   nixpkgs.config.allowUnfree = true;
