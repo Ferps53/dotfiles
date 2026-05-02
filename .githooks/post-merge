@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+echo "🔄 Atualização detectada no repositório!"
+echo "Aplicando as novas configurações do NixOS..."
+
+# Pega o nome do host atual da máquina (espera-se que seja ferps-home ou ferps-work)
+CURRENT_HOST=$(hostname)
+
+# Executa o rebuild apontando para o flake correspondente à máquina atual
+sudo nixos-rebuild switch --flake .#$CURRENT_HOST
+
+if [ $? -eq 0 ]; then
+    echo "✅ Sistema atualizado com sucesso!"
+else
+    echo "❌ Erro ao atualizar o sistema. Verifique os logs acima."
+fi
