@@ -109,6 +109,7 @@
       wlogout
       hyprpaper
       hyprlock
+      hyprshot
       libreoffice
       ffmpeg
       docker
