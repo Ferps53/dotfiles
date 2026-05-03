@@ -115,7 +115,13 @@
       docker
       psmisc
       spotify
+      fastfetch
       discord
+      hypridle
+      hyprpolkitagent
+      playerctl
+      brightnessctl
+      bibata-cursors
 
       # Ferramentas de Dev
       zig
