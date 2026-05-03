@@ -77,10 +77,15 @@
     inputs.neovim-nightly-overlay.overlays.default
   ];
 
-  virtualisation.docker.enable = true;
-  virtualisation.docker.rootless = {
+  virtualisation.docker = {
     enable = true;
-    setSocketVariable = true;
+    daemon.settings = {
+      "data-root" = "/home/docker-data";
+    };
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
   };
 
   programs.java = {
