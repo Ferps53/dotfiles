@@ -92,24 +92,7 @@
     "root": {
       "inputs": {
         "neovim-nightly-overlay": "neovim-nightly-overlay",
-        "nixpkgs": "nixpkgs_2",
-        "vintagestory-pr": "vintagestory-pr"
-      }
-    },
-    "vintagestory-pr": {
-      "locked": {
-        "lastModified": 1777453886,
-        "narHash": "sha256-bK0bccv1jzWxeHBlouMau50QayArKOh5k74EJjX6G98=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "3eb8f15d9f656fe15d6997a299673646d7589259",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "pull/512160/head",
-        "repo": "nixpkgs",
-        "type": "github"
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },

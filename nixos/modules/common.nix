@@ -16,6 +16,8 @@
 
   nix = {
     settings = {
+      cores = 8;
+      max-jobs = 2;
       experimental-features = ["nix-command" "flakes"];
       auto-optimise-store = true;
     };
