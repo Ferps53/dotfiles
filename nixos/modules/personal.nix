@@ -1,9 +1,8 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     steam
-    spotify
-    discord
     wine
+    inputs.vintagestory-pr.legacyPackages.${pkgs.system}.vintagestory
   ];
 
   programs.steam.enable = true;
