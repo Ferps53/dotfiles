@@ -141,6 +141,7 @@
       bun
       openssl
       prisma-engines
+      lombok
 
       # LSPs, Formatadores e Dependências do Neovim
       alejandra
