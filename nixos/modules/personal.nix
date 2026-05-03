@@ -6,10 +6,7 @@
   environment.systemPackages = with pkgs; [
     steam
     wine
-    (import inputs.vintagestory-pr {
-      system = pkgs.system;
-      config.allowUnfree = true;
-    }).vintagestory
+    vintagestory
   ];
 
   programs.steam.enable = true;

@@ -93,6 +93,10 @@
     package = pkgs.jdk21;
   };
 
+  zramSwap.enable = true;
+  zramSwap.algorithm = "zstd";
+  zramSwap.memoryPercent = 50; # Ele usará até 50% da sua RAM para criar o dispositivo comprimido
+
   environment = {
     systemPackages = with pkgs; [
       # Ferramentas Base

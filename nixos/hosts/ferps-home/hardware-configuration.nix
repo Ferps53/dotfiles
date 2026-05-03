@@ -17,6 +17,7 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/19b8d65f-0bff-4583-9f51-b4653e37260a";
     fsType = "btrfs";
+    options = ["compress=zstd:3" "noatime"];
   };
 
   fileSystems."/boot" = {
@@ -28,6 +29,7 @@
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/7b2892fa-4992-4cea-a2a9-6d090f2a723b";
     fsType = "btrfs";
+    options = ["compress=zstd:3" "noatime"];
   };
 
   swapDevices = [];
