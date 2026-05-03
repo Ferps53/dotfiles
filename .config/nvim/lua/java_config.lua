@@ -21,7 +21,7 @@ local system = 'linux'
 
   local config = {
     cmd = {
-      vim.fn.expand '~/.sdkman/candidates/java/25-amzn/bin/java', -- or '/path/to/java17_or_newer/bin/java'
+      vim.env.JAVA_25_HOME .. 'bin/java', -- or '/path/to/java17_or_newer/bin/java'
 
       '-Declipse.application=org.eclipse.jdt.ls.core.id1',
       '-Dosgi.bundles.defaultStartLevel=4',
@@ -65,23 +65,23 @@ local system = 'linux'
           runtimes = {
             {
               name = 'JavaSE-1.8',
-              path = vim.fn.expand '~/.sdkman/candidates/java/8.*-amzn',
+              path = vim.env.JAVA_8_HOME,
             },
             {
               name = 'JavaSE-11',
-              path = vim.fn.expand '~/.sdkman/candidates/java/11.*-amzn',
+              path = vim.env.JAVA_11_HOME,
             },
             {
               name = 'JavaSE-17',
-              path = vim.fn.expand '~/.sdkman/candidates/java/17.*-amzn',
+              path = vim.env_JAVA_17_HOME,
             },
             {
               name = 'JavaSE-21',
-              path = vim.fn.expand '~/.sdkman/candidates/java/21.*-amzn',
+              path = vim.env_JAVA_21_HOME,
             },
             {
               name = 'JavaSE-25',
-              path = vim.fn.expand '~/.sdkman/candidates/java/25-amzn',
+              path = vim.env_JAVA_25_HOME,
             },
           },
         },

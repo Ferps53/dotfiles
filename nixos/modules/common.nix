@@ -133,6 +133,7 @@
       playerctl
       brightnessctl
       bibata-cursors
+      btop
 
       # Ferramentas de Dev
       zig
@@ -155,6 +156,7 @@
       ripgrep
       fd
       lldb
+      hyprls
     ];
 
     sessionVariables = {
@@ -163,6 +165,7 @@
       JAVA_8_HOME = "${pkgs.jdk8}/lib/openjdk";
       JAVA_11_HOME = "${pkgs.jdk11}/lib/openjdk";
       JAVA_17_HOME = "${pkgs.jdk17}/lib/openjdk";
+      JAVA_21_HOME = "${pkgs.jdk21}/lib/openjdk";
       JAVA_25_HOME = "${pkgs.jdk25}/lib/openjdk";
 
       PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
