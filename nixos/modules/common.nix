@@ -138,6 +138,7 @@
       btop
       direnv
       jq
+      libnotify
 
       # Ferramentas de Dev
       zig

@@ -9,6 +9,7 @@
   ];
 
   networking.hostName = "ferps-home";
+  networking.firewall.allowedTCPPorts = [8081 19000 19001 19002];
 
   hardware.graphics = {
     enable = true;
@@ -52,6 +53,8 @@
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY = "nvidia";
     WLR_NO_HARDWARE_CURSORS = "1";
+    ANDROID_HOME = "/home/ferps/Android/Sdk";
+    ANDROID_SDK_ROOT = "/home/ferps/Android/Sdk";
   };
 
   system.stateVersion = "25.11";
