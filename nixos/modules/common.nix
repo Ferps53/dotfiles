@@ -139,6 +139,8 @@
       direnv
       jq
       libnotify
+      zip
+      unzip
 
       # Ferramentas de Dev
       zig
