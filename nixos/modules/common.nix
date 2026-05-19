@@ -95,6 +95,8 @@
     package = pkgs.jdk21;
   };
 
+  programs.direnv.enable = true;
+
   zramSwap.enable = true;
   zramSwap.algorithm = "zstd";
   zramSwap.memoryPercent = 50; # Ele usará até 50% da sua RAM para criar o dispositivo comprimido
@@ -133,6 +135,13 @@
       playerctl
       brightnessctl
       bibata-cursors
+      btop
+      direnv
+      jq
+      libnotify
+      zip
+      unzip
+      (lua5_4.withPackages (ps: with ps; [luasocket]))
 
       # Ferramentas de Dev
       zig
@@ -140,6 +149,8 @@
       bun
       openssl
       prisma-engines
+      lombok
+      claude-code
 
       # LSPs, Formatadores e Dependências do Neovim
       alejandra
@@ -156,23 +167,28 @@
       fd
       lldb
       angular-language-server
+      hyprls
     ];
 
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
+      MOZ_ENABLE_WAYLAND = "1";
 
       JAVA_8_HOME = "${pkgs.jdk8}/lib/openjdk";
       JAVA_11_HOME = "${pkgs.jdk11}/lib/openjdk";
       JAVA_17_HOME = "${pkgs.jdk17}/lib/openjdk";
+      JAVA_21_HOME = "${pkgs.jdk21}/lib/openjdk";
       JAVA_25_HOME = "${pkgs.jdk25}/lib/openjdk";
+      LOMBOK_JAR = "${pkgs.lombok}/share/java/lombok.jar";
 
       PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
       PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
       PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
       PRISMA_FMT_BINARY = "${pkgs.prisma-engines}/bin/prisma-fmt";
     };
-  };
 
+    pathsToLink = ["/share/hypr"];
+  };
   security.rtkit.enable = true;
   nixpkgs.config.allowUnfree = true;
 }
