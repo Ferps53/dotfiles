@@ -141,6 +141,7 @@
       libnotify
       zip
       unzip
+      (lua5_4.withPackages (ps: with ps; [luasocket]))
 
       # Ferramentas de Dev
       zig
@@ -184,8 +185,9 @@
       PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
       PRISMA_FMT_BINARY = "${pkgs.prisma-engines}/bin/prisma-fmt";
     };
-  };
 
+    pathsToLink = ["/share/hypr"];
+  };
   security.rtkit.enable = true;
   nixpkgs.config.allowUnfree = true;
 }
