@@ -151,10 +151,14 @@
       prisma-engines
       lombok
       claude-code
+      gcc
+      tree-sitter
+      maven
 
       # LSPs, Formatadores e Dependências do Neovim
       alejandra
       nil
+      google-java-format
       lua-language-server
       typescript-language-server
       svelte-language-server

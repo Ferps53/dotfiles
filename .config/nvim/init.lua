@@ -98,7 +98,8 @@ vim.pack.add({
   },
   { src = 'https://github.com/vyfor/cord.nvim', },
   { src = 'https://github.com/nvim-flutter/flutter-tools.nvim' },
-  { src = 'https://github.com/iamcco/markdown-preview.nvim' }
+  { src = 'https://github.com/iamcco/markdown-preview.nvim' },
+  { src = 'https://github.com/stevearc/conform.nvim' },
 })
 
 require('lualine').setup({
@@ -130,29 +131,28 @@ require("catppuccin").setup({
 })
 
 vim.cmd.colorscheme "catppuccin"
+
 vim.lsp.enable({ "lua_ls", "svelte-language-server", "zls", "lemminx", "dcm", "biome", "ts_ls", "prisma-ls", "angularls" })
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
+      diagnostics = {
+        globals = { "vim", "hl" },
+      },
       workspace = {
-        library = { vim.api.nvim_get_runtime_file("", true), "/run/current-system/sw/share/hypr/stubs" },
-      }
-    }
-  }
+        library = vim.list_extend(
+          vim.api.nvim_get_runtime_file("lua", true),
+          { "/run/current-system/sw/share/hypr/stubs" }
+        ),
+        checkThirdParty = false,
+      },
+    },
+  },
 })
-
-
-require('cord').setup({
-  display = {
-    theme = 'catppuccin',
-    flavor = 'accent'
-  }
-});
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   pattern = { "*.hl", "hypr*.conf" },
   callback = function(event)
-    print(string.format("starting hyprls for %s", vim.inspect(event)))
     vim.lsp.start {
       name = "hyprlang",
       cmd = { "hyprls" },
@@ -201,20 +201,31 @@ require("blink.cmp").setup({
     menu = {
       auto_show = true,
       draw = {
-        treesitter = { "lsp" },
         columns = { { "kind_icon", "label", "label_description", gap = 1, }, { "kind" } },
       }
     }
 
   }
 })
-
 -- COMPLETION SETTINGS & KEYMAPS
 -- Don't select the first item automatically, but show the menu
 vim.keymap.set('n', '<leader>f', ':Pick files<CR>')
 vim.keymap.set('n', '<leader>h', ':Pick help<CR>')
 vim.keymap.set('n', '-', ':Oil<CR>')
 vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format)
+
+require("conform").setup({
+  formatters_by_ft = {
+    java = { "google-java-format" },
+  },
+  formatters = {
+    ["google-java-format"] = {
+      command = "google-java-format",
+      args = { "-" },
+      stdin = true,
+    },
+  },
+})
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)
@@ -232,7 +243,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gr', builtin.lsp_references, opts)
     vim.keymap.set('n', 'gs', builtin.lsp_workspace_symbols, opts)
     vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'x' }, '=', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+    if vim.bo[event.buf].filetype == 'java' then
+      vim.keymap.set({ 'n', 'x' }, '=', '<cmd>lua require("conform").format({ bufnr = vim.api.nvim_get_current_buf() })<cr>', opts)
+    else
+      vim.keymap.set({ 'n', 'x' }, '=', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+    end
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "g]", '<cmd>lua vim.diagnostic.jump({count=1, float=true})<cr>', opts)
     vim.keymap.set("n", "g[", '<cmd>lua vim.diagnostic.jump({count=-1, float=true})<cr>', opts)
@@ -240,21 +255,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 })
 
-local status, ts = pcall(require, "nvim-treesitter")
+require("nvim-treesitter.install").compilers = { "gcc", "cc", "clang" }
+require("nvim-treesitter").install({
+  "java", "javascript", "typescript", "html", "css",
+  "lua", "zig", "dart", "kotlin", "prisma", "nix", "markdown",
+})
 
-if status then
-  ts.setup({})
-
-  ts.install({ "java", "javascript", "typescript", "html", "css", "lua", "zig", "dart", "kotlin", "prisma", "nix" })
-
-  vim.api.nvim_create_autocmd("FileType", {
-    callback = function()
-      pcall(vim.treesitter.start)
-    end
-  })
-else
-  print("nvim-treesitter failed to load")
-end
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    pcall(vim.treesitter.start, args.buf)
+  end,
+})
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'java',

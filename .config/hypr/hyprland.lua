@@ -6,7 +6,7 @@ if hostname == 'ferps-home' then
   hl.monitor({
     output = 'eDP-1',
     position = '1920x0',
-    scale = '1',
+    scale = 1,
     mode = '1920x1080@165.01'
   })
   hl.monitor({
