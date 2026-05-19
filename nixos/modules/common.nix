@@ -155,6 +155,7 @@
       ripgrep
       fd
       lldb
+      angular-language-server
     ];
 
     sessionVariables = {

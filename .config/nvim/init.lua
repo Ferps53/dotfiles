@@ -94,7 +94,7 @@ vim.pack.add({
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
   {
     src = "https://github.com/saghen/blink.cmp",
-    version = "v1.*",
+    version = "v1.10.2",
   },
   { src = 'https://github.com/vyfor/cord.nvim', },
   { src = 'https://github.com/nvim-flutter/flutter-tools.nvim' },
@@ -130,7 +130,7 @@ require("catppuccin").setup({
 })
 
 vim.cmd.colorscheme "catppuccin"
-vim.lsp.enable({ "lua_ls", "svelte-language-server", "zls", "lemminx", "dcm", "biome", "ts_ls", "prisma-ls" })
+vim.lsp.enable({ "lua_ls", "svelte-language-server", "zls", "lemminx", "dcm", "biome", "ts_ls", "prisma-ls", "angularls" })
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
