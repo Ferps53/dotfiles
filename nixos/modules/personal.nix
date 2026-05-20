@@ -19,11 +19,11 @@
     zlib
     glib
     gtk3
-    xorg.libX11
-    xorg.libXext
-    xorg.libXrender
-    xorg.libXtst
-    xorg.libXi
+    libx11
+    libxext
+    libxrender
+    libxtst
+    libxi
     nss
     nspr
     cups
