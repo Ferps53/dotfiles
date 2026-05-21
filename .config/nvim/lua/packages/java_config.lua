@@ -1,16 +1,32 @@
 local M = {}
 
-M.plugins = {}
+M.plugins = {
+"https://codeberg.org/mfussenegger/nvim-jdtls"
+}
 
 function M:setup()
+  M:validateJdtls()
+end
+  
+
+function M:validateJdtls()
   local ok, jdtls = pcall(require, 'jdtls')
   if not ok then
     vim.notify('nvim-jdtls not installed', vim.log.levels.ERROR)
-    return
+    return nil
   end
 
   if vim.fn.executable('jdtls') ~= 1 then
     vim.notify('jdtls binary not found in PATH', vim.log.levels.ERROR)
+    return nil
+  end
+  return jdtls
+end
+
+function M:start()
+  local jdtls = M:validateJdtls()
+
+  if jdtls == nil then
     return
   end
 

@@ -34,7 +34,6 @@ vim.pack.add({
   { src = "https://github.com/nvim-tree/nvim-web-devicons" },
   { src = "https://github.com/echasnovski/mini.pick" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
-  { src = "https://codeberg.org/mfussenegger/nvim-jdtls" },
   { src = "https://github.com/mfussenegger/nvim-dap" },
   { src = "https://github.com/rcarriga/nvim-dap-ui" },
   { src = "https://github.com/theHamsta/nvim-dap-virtual-text" },
@@ -220,8 +219,8 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'java',
   callback = function()
-    require('java_config')
-        .setup()
+      vim.notify("Java found", vim.log.levels.INFO)
+    require('packages.java_config'):start()
   end
 })
 
