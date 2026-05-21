@@ -72,6 +72,9 @@ vim.opt.guicursor =
 vim.keymap.set("n", "<leader>o", ":update<CR> :source<CR>")
 vim.keymap.set("n", "<leader>w", ":write<CR>")
 vim.keymap.set("n", "<leader>q", ":quit<CR>")
+vim.keymap.set("n", "<leader>gF", function()
+  require("conform").format({ bufnr = vim.api.nvim_get_current_buf() })
+end)
 
 vim.pack.add({
   { src = "https://github.com/catppuccin/nvim" },
@@ -82,9 +85,7 @@ vim.pack.add({
   { src = "https://github.com/nvim-lua/plenary.nvim" },
   { src = "https://github.com/nvim-tree/nvim-web-devicons" },
   { src = "https://github.com/echasnovski/mini.pick" },
-  { src = "https://github.com/mason-org/mason.nvim" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
-  { src = "https://github.com/mason-org/mason-registry" },
   { src = "https://codeberg.org/mfussenegger/nvim-jdtls" },
   { src = "https://github.com/mfussenegger/nvim-dap" },
   { src = "https://github.com/rcarriga/nvim-dap-ui" },
@@ -193,11 +194,10 @@ require("oil").setup({
     show_hidden = true
   },
 })
-require("mason").setup()
 require("blink.cmp").setup({
   signature = { enabled = true },
   completion = {
-    documentation = { auto_show = true, auto_show_delay_ms = 500 },
+    documentation = { auto_show = true, auto_show_delay_ms = 0 },
     menu = {
       auto_show = true,
       draw = {
@@ -212,11 +212,18 @@ require("blink.cmp").setup({
 vim.keymap.set('n', '<leader>f', ':Pick files<CR>')
 vim.keymap.set('n', '<leader>h', ':Pick help<CR>')
 vim.keymap.set('n', '-', ':Oil<CR>')
-vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format)
 
 require("conform").setup({
   formatters_by_ft = {
-    java = { "google-java-format" },
+    java       = { "google-java-format" },
+    typescript = { "biome" },
+    javascript = { "biome" },
+    json       = { "biome" },
+    jsonc      = { "biome" },
+    scss       = { "biome" },
+    css        = { "biome" },
+    html       = { "prettier" },
+    angular    = { "prettier" }
   },
   formatters = {
     ["google-java-format"] = {
@@ -243,11 +250,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gr', builtin.lsp_references, opts)
     vim.keymap.set('n', 'gs', builtin.lsp_workspace_symbols, opts)
     vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
-    if vim.bo[event.buf].filetype == 'java' then
-      vim.keymap.set({ 'n', 'x' }, '=', '<cmd>lua require("conform").format({ bufnr = vim.api.nvim_get_current_buf() })<cr>', opts)
-    else
-      vim.keymap.set({ 'n', 'x' }, '=', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-    end
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "g]", '<cmd>lua vim.diagnostic.jump({count=1, float=true})<cr>', opts)
     vim.keymap.set("n", "g[", '<cmd>lua vim.diagnostic.jump({count=-1, float=true})<cr>', opts)
@@ -258,7 +260,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 require("nvim-treesitter.install").compilers = { "gcc", "cc", "clang" }
 require("nvim-treesitter").install({
   "java", "javascript", "typescript", "html", "css",
-  "lua", "zig", "dart", "kotlin", "prisma", "nix", "markdown",
+  "lua", "zig", "dart", "kotlin", "prisma", "nix", "markdown", "angular"
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -303,3 +305,5 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.g.mkdp_auto_close = 0
 vim.g.mkdp_theme = 'dark'
 vim.keymap.set('n', '<leader>mp', ':MarkdownPreviewToggle<CR>', { desc = 'Abrir/Fechar previsão de markdown' })
+
+vim.filetype.add({ extension = { html = "angular" } })

@@ -154,6 +154,8 @@
       gcc
       tree-sitter
       maven
+      prettier
+      insomnia
 
       # LSPs, Formatadores e Dependências do Neovim
       alejandra
