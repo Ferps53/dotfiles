@@ -190,6 +190,8 @@
       lldb
       angular-language-server
       hyprls
+      fzf
+      bat
     ];
 
     sessionVariables = {

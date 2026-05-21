@@ -1,5 +1,7 @@
 local M = {}
 
+M.plugins = {}
+
 function M:setup()
   local ok, jdtls = pcall(require, 'jdtls')
   if not ok then
@@ -68,8 +70,8 @@ function M:setup()
         maven = { downloadSources = true },
         configuration = { runtimes = runtimes },
         references = { includeDecompiledSources = true },
-        implementationsCodeLens = { enabled = false },
-        referenceCodeLens = { enabled = false },
+        implementationsCodeLens = { enabled = true },
+        referenceCodeLens = { enabled = true },
         inlayHints = { parameterNames = { enabled = 'none' } },
         signatureHelp = { enabled = true, description = { enabled = true } },
         sources = {

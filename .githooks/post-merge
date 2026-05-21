@@ -5,7 +5,7 @@ echo "Aplicando as novas configurações do NixOS..."
 
 CURRENT_HOST=$(hostname)
 
-sudo nixos-rebuild switch --flake .#$CURRENT_HOST
+sudo nixos-rebuild switch --flake ~/dotfiles/nixos#$CURRENT_HOST
 
 if [ $? -eq 0 ]; then
     echo "✅ Sistema atualizado com sucesso!"

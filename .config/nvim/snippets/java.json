@@ -1,0 +1,232 @@
+{
+  "Main class": {
+    "prefix": "main",
+    "body": [
+      "public class ${1:${TM_FILENAME_BASE}} {",
+      "\tpublic static void main(String[] args) {",
+      "\t\t${0}",
+      "\t}",
+      "}"
+    ],
+    "description": "main class with main method"
+  },
+  "Class": {
+    "prefix": "cls",
+    "body": [
+      "public class ${1:Name} {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "class declaration"
+  },
+  "Record": {
+    "prefix": "rec",
+    "body": ["public record ${1:Name}(${2:String field}) {}"],
+    "description": "record declaration (Java 16+)"
+  },
+  "Sealed interface": {
+    "prefix": "sealed",
+    "body": [
+      "public sealed interface ${1:Name} permits ${2:SubType} {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "sealed interface (Java 17+)"
+  },
+  "Interface": {
+    "prefix": "iface",
+    "body": ["public interface ${1:Name} {", "\t${0}", "}"],
+    "description": "interface declaration"
+  },
+  "Enum": {
+    "prefix": "enum",
+    "body": ["public enum ${1:Name} {", "\t${2:VALUE1},", "\t${3:VALUE2};", "\t${0}", "}"],
+    "description": "enum declaration"
+  },
+  "Constructor": {
+    "prefix": "ctor",
+    "body": [
+      "public ${1:${TM_FILENAME_BASE}}(${2}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "constructor"
+  },
+  "Method": {
+    "prefix": "meth",
+    "body": ["public ${1:void} ${2:name}(${3}) {", "\t${0}", "}"],
+    "description": "public method"
+  },
+  "Private method": {
+    "prefix": "pmeth",
+    "body": ["private ${1:void} ${2:name}(${3}) {", "\t${0}", "}"],
+    "description": "private method"
+  },
+  "Getter": {
+    "prefix": "get",
+    "body": ["public ${1:String} get${2:Field}() {", "\treturn ${3:field};", "}"],
+    "description": "getter method"
+  },
+  "Setter": {
+    "prefix": "set",
+    "body": ["public void set${1:Field}(${2:String} ${3:value}) {", "\tthis.${3:value} = ${3:value};", "}"],
+    "description": "setter method"
+  },
+  "Try-catch": {
+    "prefix": "try",
+    "body": [
+      "try {",
+      "\t${1}",
+      "} catch (${2:Exception} e) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "try-catch block"
+  },
+  "Try-with-resources": {
+    "prefix": "tryr",
+    "body": [
+      "try (${1:Resource res} = ${2:new Resource()}) {",
+      "\t${0}",
+      "} catch (${3:Exception} e) {",
+      "\t",
+      "}"
+    ],
+    "description": "try-with-resources"
+  },
+  "For-each": {
+    "prefix": "fore",
+    "body": ["for (${1:String} ${2:item} : ${3:collection}) {", "\t${0}", "}"],
+    "description": "enhanced for loop"
+  },
+  "Stream filter-map-collect": {
+    "prefix": "stream",
+    "body": [
+      "${1:list}.stream()",
+      "\t\t.filter(${2:e} -> ${3:condition})",
+      "\t\t.map(${2} -> ${4:transform})",
+      "\t\t.collect(Collectors.toList());"
+    ],
+    "description": "stream filter-map-collect"
+  },
+  "Optional": {
+    "prefix": "opt",
+    "body": ["Optional.ofNullable(${1:value})", "\t\t.map(${2:v} -> ${3:transform})", "\t\t.orElse(${4:defaultValue});"],
+    "description": "Optional chain"
+  },
+  "Switch expression": {
+    "prefix": "sw",
+    "body": [
+      "var result = switch (${1:value}) {",
+      "\tcase ${2:A} -> ${3};",
+      "\tcase ${4:B} -> ${5};",
+      "\tdefault -> ${6};",
+      "};"
+    ],
+    "description": "switch expression (Java 14+)"
+  },
+  "JUnit test": {
+    "prefix": "test",
+    "body": [
+      "@Test",
+      "void ${1:shouldDoSomething}() {",
+      "\t// given",
+      "\t${2}",
+      "\t// when",
+      "\t${3}",
+      "\t// then",
+      "\t${0}",
+      "}"
+    ],
+    "description": "JUnit 5 test method"
+  },
+  "JUnit test class": {
+    "prefix": "testcls",
+    "body": [
+      "class ${1:${TM_FILENAME_BASE}}Test {",
+      "",
+      "\t@Test",
+      "\tvoid ${2:shouldDoSomething}() {",
+      "\t\t${0}",
+      "\t}",
+      "}"
+    ],
+    "description": "JUnit 5 test class"
+  },
+  "Parametrized test": {
+    "prefix": "ptest",
+    "body": [
+      "@ParameterizedTest",
+      "@ValueSource(${1:strings} = {${2:\"a\", \"b\"}})",
+      "void ${3:name}(${4:String} ${5:input}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "JUnit 5 parameterized test"
+  },
+  "Mockito mock": {
+    "prefix": "mock",
+    "body": ["${1:Service} ${2:service} = mock(${1:Service}.class);"],
+    "description": "Mockito mock"
+  },
+  "Mockito when": {
+    "prefix": "when",
+    "body": ["when(${1:mock}.${2:method}(${3})).thenReturn(${4:value});"],
+    "description": "Mockito when-thenReturn"
+  },
+  "Mockito verify": {
+    "prefix": "verify",
+    "body": ["verify(${1:mock}, ${2:times(1)}).${3:method}(${4});"],
+    "description": "Mockito verify"
+  },
+  "Logger": {
+    "prefix": "log",
+    "body": ["private static final Logger log = LoggerFactory.getLogger(${1:${TM_FILENAME_BASE}}.class);"],
+    "description": "SLF4J logger"
+  },
+  "Spring component": {
+    "prefix": "comp",
+    "body": ["@Component", "public class ${1:${TM_FILENAME_BASE}} {", "\t${0}", "}"],
+    "description": "@Component class"
+  },
+  "Spring service": {
+    "prefix": "svc",
+    "body": ["@Service", "public class ${1:${TM_FILENAME_BASE}} {", "\t${0}", "}"],
+    "description": "@Service class"
+  },
+  "Spring REST controller": {
+    "prefix": "ctrl",
+    "body": [
+      "@RestController",
+      "@RequestMapping(\"${1:/api/v1/resource}\")",
+      "public class ${2:${TM_FILENAME_BASE}} {",
+      "",
+      "\t@GetMapping",
+      "\tpublic ResponseEntity<${3:Object}> getAll() {",
+      "\t\t${0}",
+      "\t}",
+      "}"
+    ],
+    "description": "@RestController with @RequestMapping"
+  },
+  "Spring GetMapping": {
+    "prefix": "getmap",
+    "body": [
+      "@GetMapping(\"${1:/{id}}\")",
+      "public ResponseEntity<${2:Object}> ${3:getById}(${4:@PathVariable Long id}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "@GetMapping handler"
+  },
+  "Spring PostMapping": {
+    "prefix": "post",
+    "body": [
+      "@PostMapping",
+      "public ResponseEntity<${1:Object}> ${2:create}(@RequestBody ${3:Object} ${4:body}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "@PostMapping handler"
+  }
+}
