@@ -4,9 +4,6 @@ require("packages")
 vim.keymap.set("n", "<Leader>o", ":update<CR> :source<CR>")
 vim.keymap.set("n", "<leader>w", ":write<CR>")
 vim.keymap.set("n", "<leader>q", ":quit<CR>")
-vim.keymap.set("n", "<leader>gF", function()
-  require("conform").format({ bufnr = vim.api.nvim_get_current_buf() })
-end)
 vim.keymap.set("n", "<leader>R", ":restart<CR>")
 
 vim.g._start_time = vim.uv.hrtime()
@@ -25,7 +22,6 @@ if ok then
 end
 
 vim.pack.add({
-  { src = "https://github.com/catppuccin/nvim" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/stevearc/oil.nvim" },
   { src = "https://github.com/nvim-tree/nvim-web-devicons" },
@@ -47,7 +43,6 @@ vim.pack.add({
   { src = 'https://github.com/vyfor/cord.nvim', },
   { src = 'https://github.com/nvim-flutter/flutter-tools.nvim' },
   { src = 'https://github.com/iamcco/markdown-preview.nvim' },
-  { src = 'https://github.com/stevearc/conform.nvim' },
 })
 
 require('lualine').setup({
@@ -74,11 +69,6 @@ end
 vim.keymap.set({ 'n' }, '<Leader>d', ':DapNew<CR>')
 vim.keymap.set({ 'n', 'i' }, '<C-b>', ':DapToggleBreakpoint<CR>')
 
-require("catppuccin").setup({
-  transparent_background = true
-})
-
-vim.cmd.colorscheme "catppuccin"
 
 vim.lsp.enable({ "lua_ls", "svelte-language-server", "zls", "lemminx", "dcm", "biome", "ts_ls", "prisma-ls", "angularls" })
 vim.lsp.config("lua_ls", {
@@ -160,26 +150,6 @@ vim.keymap.set('n', '<leader>pf', ':Pick files<CR>')
 vim.keymap.set('n', '<leader>h', ':Pick help<CR>')
 vim.keymap.set('n', '-', ':Oil<CR>')
 
-require("conform").setup({
-  formatters_by_ft = {
-    java       = { "google-java-format" },
-    typescript = { "biome" },
-    javascript = { "biome" },
-    json       = { "biome" },
-    jsonc      = { "biome" },
-    scss       = { "biome" },
-    css        = { "biome" },
-    html       = { "prettier" },
-    angular    = { "prettier" }
-  },
-  formatters = {
-    ["google-java-format"] = {
-      command = "google-java-format",
-      args = { "-" },
-      stdin = true,
-    },
-  },
-})
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)
@@ -219,16 +189,10 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'java',
   callback = function()
-      vim.notify("Java found", vim.log.levels.INFO)
     require('packages.java_config'):start()
   end
 })
 
-require("catppuccin").setup({
-  transparent_background = true,
-})
-
-vim.cmd.colorscheme "catppuccin"
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",

@@ -7,7 +7,6 @@ M.plugins = {
 function M:setup()
   M:validateJdtls()
 end
-  
 
 function M:validateJdtls()
   local ok, jdtls = pcall(require, 'jdtls')

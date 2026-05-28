@@ -6,15 +6,28 @@ local function load(specifications, module)
   end
 
   table.insert(specifications, specification)
-  vim.notify("packages loaded: ".. module.. "\n", vim.log.levels.INFO)
+  vim.notify("packages loaded: ".. module, vim.log.levels.INFO)
 end
 
 local specifications = {}
 
 -- Shared dependencies
-load(specifications, "packages.deps")
-load(specifications, "packages.java_config")
-load(specifications, "packages.fzf")
+
+  local source = debug.getinfo(1, "S").source:sub(2)
+local dir = vim.fs.dirname(source)
+for name, type in vim.fs.dir(dir) do
+
+
+  if (type == "file") then
+
+    local package = name:gsub("%.lua$", "")
+
+    if package ~= "init" then
+      load(specifications, "packages." .. package)
+    end
+  end
+
+end
 
 local all_plugins = {}
 
