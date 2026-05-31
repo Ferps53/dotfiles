@@ -21,6 +21,7 @@ function M:setup()
     html       = { "prettier" },
     angular    = { "prettier" },
     lua        = { "stylua" },
+    nix        = { "alejandra" },
   },
   formatters = {
     ["google-java-format"] = {

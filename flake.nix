@@ -1,4 +1,3 @@
-# flake.nix
 {
   description = "Minha configuração modular do NixOS (Casa e Empresa)";
 
@@ -23,6 +22,16 @@
         modules = [
           ./hosts/ferps-home/hardware-configuration.nix
           ./hosts/ferps-home/configuration.nix
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "backup";
+              extraSpecialArgs = {inherit inputs;};
+              users.ferps = import ./home/ferps-home.nix;
+            };
+          }
         ];
       };
 
@@ -32,6 +41,16 @@
         modules = [
           ./hosts/ferps-work/hardware-configuration.nix
           ./hosts/ferps-work/configuration.nix
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "backup";
+              extraSpecialArgs = {inherit inputs;};
+              users.ferps = import ./home/work-home.nix;
+            };
+          }
         ];
       };
     };

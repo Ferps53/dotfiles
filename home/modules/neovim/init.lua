@@ -1,5 +1,6 @@
 require("core")
 require("packages")
+print("Balls")
 
 vim.keymap.set("n", "<Leader>o", ":update<CR> :source<CR>")
 vim.keymap.set("n", "<leader>w", ":write<CR>")
