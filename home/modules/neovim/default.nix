@@ -28,6 +28,10 @@ in {
       bat
       tree-sitter
       lldb
+      gopls
+      stylua
+      gotools
+      gofumpt
     ];
 
     sessionVariables.EDITOR = "nvim";

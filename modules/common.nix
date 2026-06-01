@@ -173,6 +173,7 @@
       maven
       prettier
       insomnia
+      go
 
       # LSPs, Formatadores e Dependências do Neovim
       alejandra

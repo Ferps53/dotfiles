@@ -22,6 +22,7 @@ function M:setup()
     angular    = { "prettier" },
     lua        = { "stylua" },
     nix        = { "alejandra" },
+    go = {"goimports", "gofumpt"}
   },
   formatters = {
     ["google-java-format"] = {
