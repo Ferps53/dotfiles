@@ -2,6 +2,12 @@ require("core")
 require("packages")
 print("Balls")
 
+-- Disable unused language-host providers (not installed on this NixOS box).
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+
 vim.keymap.set("n", "<Leader>o", ":update<CR> :source<CR>")
 vim.keymap.set("n", "<leader>w", ":write<CR>")
 vim.keymap.set("n", "<leader>q", ":quit<CR>")
@@ -52,7 +58,13 @@ require('lualine').setup({
   },
 })
 
-require('flutter-tools').setup({})
+require('flutter-tools').setup({
+  -- nixpkgs splits flutter and dart: <flutter_sdk>/bin/dart does not exist, so
+  -- flutter-tools' auto-derived dartls cmd fails. Use the standalone `dart` on PATH.
+  lsp = {
+    cmd = { "dart", "language-server", "--protocol=lsp" },
+  },
+})
 
 require("dap-lldb").setup()
 local dap, dapui = require("dap"), require("dapui")
@@ -71,7 +83,23 @@ vim.keymap.set({ 'n' }, '<Leader>d', ':DapNew<CR>')
 vim.keymap.set({ 'n', 'i' }, '<C-b>', ':DapToggleBreakpoint<CR>')
 
 
-vim.lsp.enable({ "lua_ls", "svelte-language-server", "zls", "lemminx", "dcm", "biome", "ts_ls", "prisma-ls", "angularls" })
+-- dcmls (Dart Code Metrics) omitted: the `dcm` binary isn't installed on this box.
+vim.lsp.enable({ "lua_ls", "svelte", "zls", "lemminx", "biome", "ts_ls", "prismals", "angularls", "clangd",
+  "kotlin_lsp" })
+
+-- JetBrains' official Kotlin LSP (IntelliJ-based): understands Java and Kotlin
+-- in the same project, unlike fwcd's kotlin-language-server.
+vim.lsp.config("kotlin_lsp", {
+  cmd = {
+    "kotlin-lsp",
+    "--stdio",
+    "--system-path",
+    vim.fn.stdpath("cache") .. "/kotlin-lsp",
+  },
+  -- The server needs a real project model (Gradle/Maven import); a lone .kt
+  -- buffer outside a project gives errors instead of useful diagnostics.
+  single_file_support = false,
+})
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
@@ -87,6 +115,26 @@ vim.lsp.config("lua_ls", {
       },
     },
   },
+})
+
+vim.lsp.config("clangd", {
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--clang-tidy",
+    "--header-insertion=iwyu",
+    "--completion-style=detailed",
+    "--offset-encoding=utf-16",
+  },
+  root_markers = {
+    "compile_commands.json",
+    "compile_flags.txt",
+    ".clangd",
+    "configure.ac",
+    "Makefile",
+    ".git",
+  },
+  filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
 })
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
@@ -133,6 +181,9 @@ require("oil").setup({
   },
 })
 require("blink.cmp").setup({
+  -- Use the pure-Lua fuzzy matcher: the prebuilt Rust lib isn't downloaded
+  -- (blink is managed by vim.pack, not the release tarball).
+  fuzzy = { implementation = "lua" },
   signature = { enabled = true },
   completion = {
     documentation = { auto_show = true, auto_show_delay_ms = 0 },
@@ -178,7 +229,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 require("nvim-treesitter.install").compilers = { "gcc", "cc", "clang" }
 require("nvim-treesitter").install({
   "java", "javascript", "typescript", "html", "css",
-  "lua", "zig", "dart", "kotlin", "prisma", "nix", "markdown", "angular"
+  "lua", "zig", "dart", "kotlin", "prisma", "nix", "markdown", "angular", "c"
 })
 
 vim.api.nvim_create_autocmd("FileType", {

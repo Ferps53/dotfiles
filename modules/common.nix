@@ -61,6 +61,7 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+    udisks2.enable = true;
   };
 
   programs = {
@@ -127,7 +128,11 @@
       dunst
       tmux
       waybar
-      nautilus
+      google-chrome
+      kdePackages.dolphin
+      kdePackages.ark
+      kdePackages.qtsvg
+      kdePackages.kio-fuse
       wl-clipboard
       cliphist
       rofi
@@ -159,6 +164,7 @@
           luafilesystem
         ]))
       luaPackages.luafilesystem
+      vlc
 
       # Ferramentas de Dev
       zig
@@ -173,6 +179,7 @@
       maven
       prettier
       insomnia
+      jetbrains.datagrip
 
       # LSPs, Formatadores e Dependências do Neovim
       alejandra
@@ -193,6 +200,8 @@
       hyprls
       fzf
       bat
+      obs-studio
+      blender
     ];
 
     sessionVariables = {

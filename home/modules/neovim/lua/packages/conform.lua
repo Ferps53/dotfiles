@@ -22,6 +22,8 @@ function M:setup()
     angular    = { "prettier" },
     lua        = { "stylua" },
     nix        = { "alejandra" },
+    dart = { "dart_format" },
+    kotlin     = { "ktlint" },
   },
   formatters = {
     ["google-java-format"] = {
