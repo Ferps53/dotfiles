@@ -129,6 +129,11 @@
       tmux
       waybar
       kdePackages.dolphin
+      google-chrome
+      kdePackages.dolphin
+      kdePackages.ark
+      kdePackages.qtsvg
+      kdePackages.kio-fuse
       wl-clipboard
       cliphist
       rofi
@@ -160,6 +165,7 @@
           luafilesystem
         ]))
       luaPackages.luafilesystem
+      vlc
 
       # Ferramentas de Dev
       zig
@@ -176,7 +182,7 @@
       insomnia
       go
       postgresql
-
+      jetbrains.datagrip
       # LSPs, Formatadores e Dependências do Neovim
       alejandra
       nil
@@ -196,6 +202,8 @@
       hyprls
       fzf
       bat
+      obs-studio
+      blender
     ];
 
     sessionVariables = {

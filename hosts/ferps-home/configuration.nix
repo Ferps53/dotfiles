@@ -9,7 +9,7 @@
   ];
 
   networking.hostName = "ferps-home";
-  networking.firewall.allowedTCPPorts = [8081 19000 19001 19002];
+  networking.firewall.allowedTCPPorts = [3000 8081 19000 19001 19002];
 
   hardware.graphics = {
     enable = true;
@@ -32,6 +32,11 @@
     };
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+
+  virtualisation.waydroid.enable = true;
+  networking.nftables.enable = true;
+
+  environment.systemPackages = with pkgs; [protonvpn-gui];
 
   services.power-profiles-daemon.enable = false;
 
