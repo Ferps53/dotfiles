@@ -12,11 +12,7 @@
   },
   "Class": {
     "prefix": "cls",
-    "body": [
-      "public class ${1:Name} {",
-      "\t${0}",
-      "}"
-    ],
+    "body": ["public class ${1:Name} {", "\t${0}", "}"],
     "description": "class declaration"
   },
   "Record": {
@@ -40,16 +36,18 @@
   },
   "Enum": {
     "prefix": "enum",
-    "body": ["public enum ${1:Name} {", "\t${2:VALUE1},", "\t${3:VALUE2};", "\t${0}", "}"],
+    "body": [
+      "public enum ${1:Name} {",
+      "\t${2:VALUE1},",
+      "\t${3:VALUE2};",
+      "\t${0}",
+      "}"
+    ],
     "description": "enum declaration"
   },
   "Constructor": {
     "prefix": "ctor",
-    "body": [
-      "public ${1:${TM_FILENAME_BASE}}(${2}) {",
-      "\t${0}",
-      "}"
-    ],
+    "body": ["public ${1:${TM_FILENAME_BASE}}(${2}) {", "\t${0}", "}"],
     "description": "constructor"
   },
   "Method": {
@@ -64,23 +62,25 @@
   },
   "Getter": {
     "prefix": "get",
-    "body": ["public ${1:String} get${2:Field}() {", "\treturn ${3:field};", "}"],
+    "body": [
+      "public ${1:String} get${2:Field}() {",
+      "\treturn ${3:field};",
+      "}"
+    ],
     "description": "getter method"
   },
   "Setter": {
     "prefix": "set",
-    "body": ["public void set${1:Field}(${2:String} ${3:value}) {", "\tthis.${3:value} = ${3:value};", "}"],
+    "body": [
+      "public void set${1:Field}(${2:String} ${3:value}) {",
+      "\tthis.${3:value} = ${3:value};",
+      "}"
+    ],
     "description": "setter method"
   },
   "Try-catch": {
     "prefix": "try",
-    "body": [
-      "try {",
-      "\t${1}",
-      "} catch (${2:Exception} e) {",
-      "\t${0}",
-      "}"
-    ],
+    "body": ["try {", "\t${1}", "} catch (${2:Exception} e) {", "\t${0}", "}"],
     "description": "try-catch block"
   },
   "Try-with-resources": {
@@ -111,7 +111,11 @@
   },
   "Optional": {
     "prefix": "opt",
-    "body": ["Optional.ofNullable(${1:value})", "\t\t.map(${2:v} -> ${3:transform})", "\t\t.orElse(${4:defaultValue});"],
+    "body": [
+      "Optional.ofNullable(${1:value})",
+      "\t\t.map(${2:v} -> ${3:transform})",
+      "\t\t.orElse(${4:defaultValue});"
+    ],
     "description": "Optional chain"
   },
   "Switch expression": {
@@ -181,17 +185,29 @@
   },
   "Logger": {
     "prefix": "log",
-    "body": ["private static final Logger log = LoggerFactory.getLogger(${1:${TM_FILENAME_BASE}}.class);"],
+    "body": [
+      "private static final Logger log = LoggerFactory.getLogger(${1:${TM_FILENAME_BASE}}.class);"
+    ],
     "description": "SLF4J logger"
   },
   "Spring component": {
     "prefix": "comp",
-    "body": ["@Component", "public class ${1:${TM_FILENAME_BASE}} {", "\t${0}", "}"],
+    "body": [
+      "@Component",
+      "public class ${1:${TM_FILENAME_BASE}} {",
+      "\t${0}",
+      "}"
+    ],
     "description": "@Component class"
   },
   "Spring service": {
     "prefix": "svc",
-    "body": ["@Service", "public class ${1:${TM_FILENAME_BASE}} {", "\t${0}", "}"],
+    "body": [
+      "@Service",
+      "public class ${1:${TM_FILENAME_BASE}} {",
+      "\t${0}",
+      "}"
+    ],
     "description": "@Service class"
   },
   "Spring REST controller": {

@@ -1,11 +1,7 @@
-local M = {};
+local M = {}
 
-M.packages = {};
+M.packages = {}
 
-function M:setup()
+function M:setup() end
 
-end
-
-
-
-return M;
+return M

@@ -61,6 +61,7 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+    udisks2.enable = true;
   };
 
   programs = {
@@ -127,7 +128,7 @@
       dunst
       tmux
       waybar
-      nautilus
+      kdePackages.dolphin
       wl-clipboard
       cliphist
       rofi
@@ -174,6 +175,7 @@
       prettier
       insomnia
       go
+      postgresql
 
       # LSPs, Formatadores e Dependências do Neovim
       alejandra

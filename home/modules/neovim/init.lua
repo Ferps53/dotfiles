@@ -71,7 +71,7 @@ vim.keymap.set({ 'n' }, '<Leader>d', ':DapNew<CR>')
 vim.keymap.set({ 'n', 'i' }, '<C-b>', ':DapToggleBreakpoint<CR>')
 
 
-vim.lsp.enable({ "lua_ls", "svelte-language-server", "zls", "lemminx", "dcm", "biome", "ts_ls", "prisma-ls", "angularls", "gopls" })
+vim.lsp.enable({ "lua_ls", "svelte-language-server", "zls", "lemminx", "dcm", "biome", "ts_ls", "prisma-ls", "angularls" })
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
@@ -178,7 +178,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 require("nvim-treesitter.install").compilers = { "gcc", "cc", "clang" }
 require("nvim-treesitter").install({
   "java", "javascript", "typescript", "html", "css",
-  "lua", "zig", "dart", "kotlin", "prisma", "nix", "markdown", "angular", "go"
+  "lua", "zig", "dart", "kotlin", "prisma", "nix", "markdown", "angular"
 })
 
 vim.api.nvim_create_autocmd("FileType", {
