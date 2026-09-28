@@ -180,6 +180,24 @@
       prettier
       insomnia
       jetbrains.datagrip
+      gnumake
+      zlib
+      glib
+      gtk3
+      libx11
+      libxext
+      libxrender
+      libxtst
+      libxi
+      nss
+      nspr
+      cups
+      alsa-lib
+      expat
+      libdrm
+      mesa
+      libGL
+      railway
 
       # LSPs, Formatadores e Dependências do Neovim
       alejandra

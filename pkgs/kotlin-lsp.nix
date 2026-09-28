@@ -22,12 +22,18 @@
   wayland,
   libxkbcommon,
 }: let
-  version = "262.9593.0";
+  # EAP builds expire ~30 days after their release date and then refuse to
+  # start ("This build of kotlin-server has expired"). GitHub releases and the
+  # JetBrains release feed both lag behind the CDN, so when the current build
+  # dies check the VS Code Marketplace build number in
+  # https://github.com/Kotlin/kotlin-lsp/issues and fetch it straight from the
+  # CDN path below -- the tarball is published there before it is announced.
+  version = "263.4421.0";
 
   sources = {
     x86_64-linux = {
       url = "https://download-cdn.jetbrains.com/language-server/kotlin-server/${version}/kotlin-server-${version}.tar.gz";
-      hash = "sha256-LZnY4Zj75KqPRIHjd5lyTOlIA7TqEqYLQWBA4/zXzF4=";
+      hash = "sha256-0dq073s5qI93zPaNXloWXJ88Xg+bG7mSPmJaVL08Zz8=";
     };
     aarch64-linux = {
       url = "https://download-cdn.jetbrains.com/language-server/kotlin-server/${version}/kotlin-server-${version}-aarch64.tar.gz";
