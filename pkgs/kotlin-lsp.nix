@@ -28,17 +28,12 @@
   # dies check the VS Code Marketplace build number in
   # https://github.com/Kotlin/kotlin-lsp/issues and fetch it straight from the
   # CDN path below -- the tarball is published there before it is announced.
-  version = "263.4421.0";
+  version = "263.6379.0";
 
   sources = {
     x86_64-linux = {
-      url = "https://download-cdn.jetbrains.com/language-server/kotlin-server/${version}/kotlin-server-${version}.tar.gz";
-      hash = "sha256-0dq073s5qI93zPaNXloWXJ88Xg+bG7mSPmJaVL08Zz8=";
-    };
-    aarch64-linux = {
-      url = "https://download-cdn.jetbrains.com/language-server/kotlin-server/${version}/kotlin-server-${version}-aarch64.tar.gz";
-      # Fill in with `nix-prefetch-url` if this machine ever runs aarch64.
-      hash = lib.fakeHash;
+      url = "https://download.jetbrains.com/language-server/kotlin-server/${version}/kotlin-server-${version}.tar.gz";
+      sha256 = "1k7pygw5vrhy4p25ala65i6ja1618v6brcjdlbhmzz62bm2s935b";
     };
   };
 
@@ -50,7 +45,7 @@ in
     pname = "kotlin-lsp";
     inherit version;
 
-    src = fetchurl {inherit (source) url hash;};
+    src = fetchurl {inherit (source) url sha256;};
 
     nativeBuildInputs = [autoPatchelfHook makeWrapper];
 
