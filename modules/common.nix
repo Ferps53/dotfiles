@@ -220,6 +220,10 @@
       bat
       obs-studio
       blender
+      (python3.withPackages (python-pkgs:
+        with python-pkgs; [
+          requests
+        ]))
     ];
 
     sessionVariables = {
