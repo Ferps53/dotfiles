@@ -25,14 +25,14 @@ local hostname = get_hostname()
 ------------------
 
 if hostname == "ferps-home" then
-  hl.monitor({ output = "eDP-1",    mode = "1920x1080@165.01",   position = "1920x0", scale = 1 })
+  hl.monitor({ output = "eDP-1",    mode = "1920x1080@60.0000",   position = "1920x0", scale = 1 })
   hl.monitor({ output = "HDMI-A-1", mode = "1920x1080@60.0000", position = "0x0",    scale = 1 })
 elseif hostname == "ferps-work" then
   hl.monitor({ output = "HDMI-A-1", mode = "1920x1080@60.0000", position = "0x0",    scale = 1 })
 end
 
 -- Fallback for any other monitor
-hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
+hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1, mirror="eDP-1" })
 
 hl.workspace_rule({ workspace = "1", monitor = "HDMI-A-1" })
 
@@ -49,6 +49,7 @@ local menu        = "rofi -show drun"
 -------------------
 
 hl.on("hyprland.start", function()
+  hl.exec_cmd("hyprpaper")
   hl.exec_cmd("waybar")
   hl.exec_cmd("blueman-applet")
   hl.exec_cmd("nm-applet --indicator")
@@ -59,9 +60,6 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Classic'")
   hl.exec_cmd("~/.config/hypr/auto_hz.sh")
 end)
-
--- Runs on every config load (was `exec = hyprpaper`)
-hl.exec_cmd("hyprpaper")
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----

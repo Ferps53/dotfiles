@@ -1,7 +1,6 @@
 @import 'macchiato.css';
 
 * {
-  border-radius: 0;
   font-family: 'JetBrainsMono Nerd Font', Roboto;
   font-size: 12px;
   min-height: 0;
@@ -18,10 +17,8 @@ tooltip label {
 }
 
 window#waybar {
-  padding-left: 16px;
-  background: @crust;
+  background-color: transparent;
   min-height: 40px;
-  border-bottom: 2px solid shade(@crust, 1.2);
   color: @text;
 }
 
@@ -32,7 +29,6 @@ window#waybar {
 #workspaces button {
   border-radius: 8px;
   color: @text;
-  margin: 0 2px 0 2px;
 }
 
 #workspaces button.active {
@@ -57,16 +53,9 @@ window#waybar {
 #backlight,
 #battery {
   min-width: 20px;
-  padding-left: 8px;
   border-radius: 5px;
-  padding-right: 8px;
   background-color: @mantle;
   border: 1px solid shade(@mantle, 1.2);
-  font-weight: 700;
-}
-
-#clock {
-  font-size: 14px;
 }
 
 #battery.full {

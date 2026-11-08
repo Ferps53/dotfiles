@@ -36,7 +36,7 @@
   virtualisation.waydroid.enable = true;
   networking.nftables.enable = true;
 
-  environment.systemPackages = with pkgs; [protonvpn-gui];
+  environment.systemPackages = with pkgs; [proton-vpn];
 
   services.power-profiles-daemon.enable = false;
 

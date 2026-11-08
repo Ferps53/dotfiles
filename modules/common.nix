@@ -117,6 +117,7 @@
     systemPackages = with pkgs; [
       # Ferramentas Base
       git
+      gh
       home-manager
       stow
       firefox
