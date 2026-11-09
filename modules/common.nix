@@ -116,6 +116,7 @@
   environment = {
     systemPackages = with pkgs; [
       # Ferramentas Base
+      vim
       git
       home-manager
       stow
@@ -126,7 +127,6 @@
       pavucontrol
       neovim
       dunst
-      tmux
       waybar
       kdePackages.dolphin
       google-chrome
@@ -204,6 +204,10 @@
       bat
       obs-studio
       blender
+      (python3.withPackages (python-pkgs:
+        with python-pkgs; [
+          requests
+        ]))
     ];
 
     sessionVariables = {
