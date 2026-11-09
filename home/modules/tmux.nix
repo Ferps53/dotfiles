@@ -15,6 +15,17 @@
 
     plugins = with pkgs.tmuxPlugins; [
       {
+        # tema antes do continuum: ele sobrescreve status-right, e o
+        # continuum precisa se pendurar no status-right final
+        plugin = catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_flavor 'macchiato'
+          set -g @catppuccin_window_status_style 'rounded'
+          set -g @catppuccin_window_text ' #W'
+          set -g @catppuccin_window_current_text ' #W'
+        '';
+      }
+      {
         plugin = resurrect;
         extraConfig = ''
           set -g @resurrect-capture-pane-contents 'on'
@@ -25,6 +36,14 @@
         # precisa vir depois do resurrect
         plugin = continuum;
         extraConfig = ''
+          # módulos do catppuccin v2 só existem depois do run-shell dele
+          set -g status-right-length 100
+          set -g status-left-length 100
+          set -g status-left ""
+          set -g status-right "#{E:@catppuccin_status_application}"
+          set -ag status-right "#{E:@catppuccin_status_session}"
+          set -ag status-right "#{E:@catppuccin_status_date_time}"
+
           set -g @continuum-restore 'on'
           set -g @continuum-save-interval '15'
         '';
