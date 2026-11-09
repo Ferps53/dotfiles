@@ -180,6 +180,8 @@
       maven
       prettier
       insomnia
+      go
+      postgresql
       jetbrains.datagrip
       gnumake
       zlib

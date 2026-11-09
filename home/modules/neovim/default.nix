@@ -32,6 +32,9 @@ in {
       bat
       tree-sitter
       lldb
+      gopls
+      gotools
+      gofumpt
       stylua
       # codelldb binary lives inside the vscode-lldb extension dir; wrap it onto PATH
       # so nvim-dap-lldb (which defaults to the bare command "codelldb") can find it.

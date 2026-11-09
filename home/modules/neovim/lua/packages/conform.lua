@@ -22,6 +22,7 @@ function M:setup()
 			nix = { "alejandra" },
 			dart = { "dart_format" },
 			kotlin = { "ktlint" },
+			go = { "goimports", "gofumpt" },
 		},
 		formatters = {
 			["google-java-format"] = {
