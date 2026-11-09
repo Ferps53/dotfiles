@@ -66,6 +66,12 @@ end)
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 
+-- As variáveis do Home Manager não chegam à sessão do Hyprland
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+hl.env("QT_STYLE_OVERRIDE", "kvantum")
+-- O caminho do Qt 5 (usado pelo VLC) inclui a versão: atualizar se o Qt 5 mudar
+hl.env("QT_PLUGIN_PATH", "/etc/profiles/per-user/ferps/lib/qt-6/plugins:/etc/profiles/per-user/ferps/lib/qt-5.15.19/plugins")
+
 -----------------------
 ---- LOOK AND FEEL ----
 -----------------------
