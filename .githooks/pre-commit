@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+STAGED_NIX_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.nix$')
+
+if [ -n "$STAGED_NIX_FILES" ]; then
+  echo "Formatando arquivos Nix com Alejandra..."
+  
+  for FILE in $STAGED_NIX_FILES; do
+    alejandra -q "$FILE"
+    git add "$FILE"
+  done
+  
+  echo "Formatação concluída!"
+fi

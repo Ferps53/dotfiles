@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Here we set the Bluetooth device address
 device_address="00:A4:1C:98:D7:CF"
 
 # Get the connection status of the device

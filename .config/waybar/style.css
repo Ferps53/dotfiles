@@ -1,9 +1,9 @@
 @import 'macchiato.css';
 
 * {
-  border-radius: 0;
-  font-family: 'JetBrainsMono Nerd Font', Roboto;
+  font-family: 'JetBrainsMono Nerd Font Propo', Roboto;
   font-size: 12px;
+  font-weight: 700;
   min-height: 0;
 }
 
@@ -13,37 +13,45 @@ tooltip {
 }
 
 tooltip label {
-  font-size: 10px;
+  font-size: 12px;
   color: @text;
 }
 
 window#waybar {
-  padding-left: 16px;
-  background: @crust;
-  min-height: 40px;
-  border-bottom: 2px solid shade(@crust, 1.2);
+  background-color: transparent;
   color: @text;
 }
 
 #window {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 #workspaces button {
+  background-color: @mantle;
+  border: 2px solid shade(@mantle, 1.5);
   border-radius: 8px;
   color: @text;
-  margin: 0 2px 0 2px;
-}
-
-#workspaces button.active {
-  background-color: shade(@teal, 0.6);
+  transition: background-color 150ms ease, border-color 150ms ease;
 }
 
 #workspaces button:hover {
-  opacity: 0.5;
+  background-image: none;
+  box-shadow: none;
+  text-shadow: none;
+  background-color: @surface0;
+  border-color: @surface2;
 }
 
-#workspaces,
+#workspaces button.active {
+  background-color: shade(@blue, 0.6);
+  border: 2px solid shade(@blue, 0.8);
+}
+
+#workspaces button.active:hover {
+  background-color: shade(@blue, 0.8);
+  border-color: @blue;
+}
+
 #pulseaudio,
 #network,
 #cpu,
@@ -56,17 +64,11 @@ window#waybar {
 #custom-power,
 #backlight,
 #battery {
-  min-width: 20px;
-  padding-left: 8px;
-  border-radius: 5px;
-  padding-right: 8px;
+  padding: 0 10px;
+  min-width: 44px;
+  border-radius: 8px;
   background-color: @mantle;
-  border: 1px solid shade(@mantle, 1.2);
-  font-weight: 700;
-}
-
-#clock {
-  font-size: 14px;
+  border: 2px solid shade(@mantle, 1.5);
 }
 
 #battery.full {
@@ -75,6 +77,18 @@ window#waybar {
 
 #battery.charging {
   background-color: shade(@flamingo, 0.5);
+}
+
+#temperature.warning,
+#cpu.warning,
+#memory.warning {
+  background-color: shade(@peach, 0.5);
+}
+
+#temperature.critical,
+#cpu.critical,
+#memory.critical {
+  background-color: shade(@red, 0.5);
 }
 
 #power-profiles-daemon.balanced {
