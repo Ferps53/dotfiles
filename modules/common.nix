@@ -118,6 +118,7 @@
       # Ferramentas Base
       vim
       git
+      gh
       home-manager
       stow
       firefox
@@ -128,7 +129,6 @@
       neovim
       dunst
       waybar
-      kdePackages.dolphin
       google-chrome
       kdePackages.dolphin
       kdePackages.ark
@@ -183,6 +183,25 @@
       go
       postgresql
       jetbrains.datagrip
+      gnumake
+      zlib
+      glib
+      gtk3
+      libx11
+      libxext
+      libxrender
+      libxtst
+      libxi
+      nss
+      nspr
+      cups
+      alsa-lib
+      expat
+      libdrm
+      mesa
+      libGL
+      railway
+
       # LSPs, Formatadores e Dependências do Neovim
       alejandra
       nil

@@ -3,14 +3,10 @@
   inputs,
   ...
 }: {
-  imports = [./flutter.nix];
-
   environment.systemPackages = with pkgs; [
     steam
     wine
     vintagestory
-    android-studio
-    android-tools
   ];
 
   programs = {

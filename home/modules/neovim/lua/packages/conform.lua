@@ -5,39 +5,38 @@ M.plugins = {
 }
 
 function M:setup()
-  local conform = require("conform")
+	local conform = require("conform")
 
-  conform.setup({
-  formatters_by_ft = {
-    java       = { "google-java-format" },
-    typescript = { "biome" },
-    javascript = { "biome" },
-    json       = { "biome" },
-    jsonc      = { "biome" },
-    scss       = { "biome" },
-    css        = { "biome" },
-    html       = { "prettier" },
-    angular    = { "prettier" },
-    lua        = { "stylua" },
-    nix        = { "alejandra" },
-    dart = { "dart_format" },
-    kotlin     = { "ktlint" },
+	conform.setup({
+		formatters_by_ft = {
+			java = { "google-java-format" },
+			typescript = { "biome" },
+			javascript = { "biome" },
+			json = { "biome" },
+			jsonc = { "biome" },
+			scss = { "biome" },
+			css = { "biome" },
+			html = { "prettier" },
+			angular = { "prettier" },
+			lua = { "stylua" },
+			nix = { "alejandra" },
+			dart = { "dart_format" },
+			kotlin = { "ktlint" },
 			go = { "goimports", "gofumpt" },
-  },
-  formatters = {
-    ["google-java-format"] = {
-      command = "google-java-format",
-      args = { "-" },
-      stdin = true,
-    },
-  },
-})
-  local map =require("core.mapper").mapper();
+		},
+		formatters = {
+			["google-java-format"] = {
+				command = "google-java-format",
+				args = { "-" },
+				stdin = true,
+			},
+		},
+	})
+	local map = require("core.mapper").mapper()
 
-map("n", "<leader>gF", function()
-  conform.format({ bufnr = vim.api.nvim_get_current_buf() })
-end)
-
+	map("n", "<leader>gF", function()
+		conform.format({ async = true, bufnr = vim.api.nvim_get_current_buf(), lsp_fallback = true })
+	end)
 end
 
 return M

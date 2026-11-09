@@ -36,7 +36,7 @@
   virtualisation.waydroid.enable = true;
   networking.nftables.enable = true;
 
-  environment.systemPackages = with pkgs; [protonvpn-gui];
+  environment.systemPackages = with pkgs; [proton-vpn];
 
   services.power-profiles-daemon.enable = false;
 
@@ -57,7 +57,6 @@
     LIBVA_DRIVER_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY = "nvidia";
-    WLR_NO_HARDWARE_CURSORS = "1";
     ANDROID_HOME = "/home/ferps/Android/Sdk";
     ANDROID_SDK_ROOT = "/home/ferps/Android/Sdk";
   };
