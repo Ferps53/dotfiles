@@ -14,3 +14,8 @@ vim.api.nvim_set_keymap("n", "<Down>", msg, { noremap = true, silent = false })
 vim.api.nvim_set_keymap("n", "<Left>", msg, { noremap = true, silent = false })
 vim.api.nvim_set_keymap("n", "<Right>", msg, { noremap = true, silent = false })
 vim.api.nvim_set_keymap("n", "<BS>", msg, { noremap = true, silent = false })
+
+vim.keymap.set("n", "<Leader>o", ":update<CR> :source<CR>")
+vim.keymap.set("n", "<leader>w", ":write<CR>")
+vim.keymap.set("n", "<leader>q", ":quit<CR>")
+vim.keymap.set("n", "<leader>R", ":restart<CR>")

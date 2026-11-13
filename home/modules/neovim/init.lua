@@ -1,23 +1,6 @@
 require("core")
 require("packages")
 
--- Disable unused language-host providers (not installed on this NixOS box).
-vim.g.loaded_node_provider = 0
-vim.g.loaded_perl_provider = 0
-vim.g.loaded_python3_provider = 0
-vim.g.loaded_ruby_provider = 0
-
-vim.keymap.set("n", "<Leader>o", ":update<CR> :source<CR>")
-vim.keymap.set("n", "<leader>w", ":write<CR>")
-vim.keymap.set("n", "<leader>q", ":quit<CR>")
-vim.keymap.set("n", "<leader>R", ":restart<CR>")
-
-vim.g._start_time = vim.uv.hrtime()
-local ok, ui2 = pcall(require, "vim._core.ui2")
-if ok then
-	ui2.enable()
-end
-
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
@@ -38,21 +21,12 @@ vim.pack.add({
 		version = "v1.10.2",
 	},
 	{ src = "https://github.com/vyfor/cord.nvim" },
-	{ src = "https://github.com/nvim-flutter/flutter-tools.nvim" },
 	{ src = "https://github.com/iamcco/markdown-preview.nvim" },
 })
 
 require("lualine").setup({
 	options = {
 		theme = "catppuccin",
-	},
-})
-
-require("flutter-tools").setup({
-	-- nixpkgs splits flutter and dart: <flutter_sdk>/bin/dart does not exist, so
-	-- flutter-tools' auto-derived dartls cmd fails. Use the standalone `dart` on PATH.
-	lsp = {
-		cmd = { "dart", "language-server", "--protocol=lsp" },
 	},
 })
 
@@ -72,7 +46,6 @@ end
 vim.keymap.set({ "n" }, "<Leader>d", ":DapNew<CR>")
 vim.keymap.set({ "n", "i" }, "<C-b>", ":DapToggleBreakpoint<CR>")
 
--- dcmls (Dart Code Metrics) omitted: the `dcm` binary isn't installed on this box.
 vim.lsp.enable({
 	"lua_ls",
 	"svelte",

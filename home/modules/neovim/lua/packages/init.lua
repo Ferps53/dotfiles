@@ -6,7 +6,6 @@ local function load(specifications, module)
 	end
 
 	table.insert(specifications, specification)
-	vim.notify("packages loaded: " .. module, vim.log.levels.INFO)
 end
 
 local specifications = {}

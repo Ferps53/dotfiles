@@ -4,8 +4,6 @@ local function load(module)
 		vim.notify("Packages failed to load: " .. module .. "\n" .. specification, vim.log.levels.ERROR)
 		return
 	end
-
-	vim.notify("packages loaded: " .. module, vim.log.levels.INFO)
 end
 
 -- Shared dependencies

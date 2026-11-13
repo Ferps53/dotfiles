@@ -7,7 +7,7 @@ M.plugins = {
 function M.setup()
 	require("illuminate").configure({
 		providers = { "lsp", "treesitter", "regex" },
-		delay = 100,
+		delay = 50,
 		under_cursor = true,
 		large_file_cutoff = 2000,
 		large_file_overrides = {
