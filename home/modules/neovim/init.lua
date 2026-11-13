@@ -3,7 +3,6 @@ require("packages")
 
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
@@ -126,24 +125,6 @@ minipick.registry.file = function()
 	return MiniPick.builtin.cli({ command = command }, { source = { name = "Files" } })
 end
 
-require("oil").setup({
-	lsp_file_methods = {
-		enabled = true,
-		timeout_ms = 1000,
-		autosave_changes = true,
-	},
-	columns = {
-		"icon",
-	},
-	float = {
-		max_width = 0.3,
-		max_height = 0.6,
-		border = "rounded",
-	},
-	view_options = {
-		show_hidden = true,
-	},
-})
 require("blink.cmp").setup({
 	-- Use the pure-Lua fuzzy matcher: the prebuilt Rust lib isn't downloaded
 	-- (blink is managed by vim.pack, not the release tarball).
