@@ -23,6 +23,7 @@ function M.setup()
 			show_hidden = true,
 		},
 	})
+	vim.keymap.set("n", "-", ":Oil<CR>")
 end
 
 return M
