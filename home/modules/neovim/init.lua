@@ -15,7 +15,6 @@ vim.pack.add({
 	{ src = "https://github.com/theHamsta/nvim-dap-virtual-text" },
 	{ src = "https://github.com/julianolf/nvim-dap-lldb" },
 	{ src = "https://github.com/nvim-neotest/nvim-nio" },
-	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{
 		src = "https://github.com/saghen/blink.cmp",
 		version = "v1.10.2",
@@ -24,11 +23,6 @@ vim.pack.add({
 	{ src = "https://github.com/iamcco/markdown-preview.nvim" },
 })
 
-require("lualine").setup({
-	options = {
-		theme = "catppuccin",
-	},
-})
 
 require("dap-lldb").setup()
 local dap, dapui = require("dap"), require("dapui")
