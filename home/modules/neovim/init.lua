@@ -23,7 +23,6 @@ vim.pack.add({
 	{ src = "https://github.com/iamcco/markdown-preview.nvim" },
 })
 
-
 require("dap-lldb").setup()
 local dap, dapui = require("dap"), require("dapui")
 

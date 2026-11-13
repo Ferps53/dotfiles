@@ -7,7 +7,7 @@ M.plugins = {
 function M.setup()
 	require("lualine").setup({
 		options = {
-			theme = "catppuccin",
+			theme = "catppuccin-macchiato",
 		},
 	})
 end
